@@ -1,4 +1,4 @@
-<h2>Home task #21</h2>
+<h2>School journal</h2>
 <h4>Description</h4>
 <p>This app acts as a school journal. Allows you to enter data in the form of marks, students, subjects, teachers, and student parents.</p>
 <h4>Task list</h4>

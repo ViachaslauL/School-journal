@@ -18,28 +18,64 @@ public class SubjectController {
     @Autowired
     private SubjectService subjectService;
 
+    @GetMapping("/find_subject")
+    public String findSubject(@RequestBody String id) {
+        Subject subject = subjectService.findSubject(Long.parseLong(id));
+
+        StringBuilder responseBody = new StringBuilder();
+        responseBody
+                .append("[")
+                .append("subject id: '").append(subject.getId()).append("', ")
+                .append("subject name: '").append(subject.getName()).append("'")
+                .append("]");
+
+        return responseBody.toString();
+    }
+
     @GetMapping("/subjects")
-    public String subjects() {
+    public String findAllSubjects() {
         StringBuilder responseBody = new StringBuilder();
 
-        for (Subject subject : subjectService.allSubjects()) {
+        for (Subject subject : subjectService.findAllSubjects()) {
             responseBody
                     .append("[")
                     .append("subject id: '").append(subject.getId()).append("'")
                     .append(", ")
                     .append("subject name: '").append(subject.getName()).append("'")
-                    .append("]");
+                    .append("]\n");
         }
 
         return responseBody.toString();
     }
 
     @PostMapping("/save_subject")
-    public void saveSubject(@RequestBody Subject subject) {
+    public String saveSubject(@RequestBody Subject subject) {
+        Subject savedSubject = subjectService.saveSubject(subject);
 
-        LOG.info("Was an object inserted: {}",
-                subjectService.saveSubject(subject).toString());
+        StringBuilder responseBody = new StringBuilder();
 
+        if (savedSubject != null) {
+            responseBody
+                    .append("Subject: [").append(subject.toString()).append("]")
+                    .append(" saved to database.");
+        } else {
+            responseBody
+                    .append("Something gone wrong.");
+        }
+
+        return responseBody.toString();
+     }
+
+    @PostMapping("/update_subject")
+    public String updateSubject(@RequestBody Subject subject) {
+        boolean isUpdate = subjectService.updateSubject(subject);
+        return isUpdate ? "true" : "false";
+    }
+
+    @PostMapping("/delete_subject")
+    public String deleteSubject(@RequestBody Subject subject) {
+        boolean isDeleted = subjectService.deleteSubject(subject);
+        return isDeleted ? "true" : "false";
     }
 
 }

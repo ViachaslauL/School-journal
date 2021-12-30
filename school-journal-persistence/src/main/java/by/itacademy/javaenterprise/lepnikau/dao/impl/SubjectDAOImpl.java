@@ -40,7 +40,7 @@ public class SubjectDAOImpl implements SubjectDAO {
     @Override
     @Transactional
     public Subject get(Long id) {
-        try{
+        try {
             return entityManager.find(Subject.class, id);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
@@ -57,12 +57,33 @@ public class SubjectDAOImpl implements SubjectDAO {
     }
 
     @Override
-    public boolean update(Subject entity) {
+    @Transactional
+    public boolean update(Subject subject) {
+        if (subject == null) throw new IllegalArgumentException();
+
+        try {
+            entityManager.merge(subject);
+            return true;
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+
         return false;
     }
 
     @Override
-    public boolean delete(Subject entity) {
+    @Transactional
+    public boolean delete(Subject detachedSubject) {
+        if (detachedSubject == null) throw new IllegalArgumentException();
+
+        try {
+            Subject managedSubject = entityManager.merge(detachedSubject);
+            entityManager.remove(managedSubject);
+            return true;
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+
         return false;
     }
 }

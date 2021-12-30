@@ -22,7 +22,6 @@
         <module>school-journal-service</module>
     </modules>
 
-
     <dependencyManagement>
         <dependencies>
             <dependency>

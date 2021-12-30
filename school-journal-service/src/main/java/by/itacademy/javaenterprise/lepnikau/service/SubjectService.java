@@ -21,7 +21,19 @@ public class SubjectService {
         return subjectDAO.save(subject);
     }
 
-    public List<Subject> allSubjects() {
+    public Subject findSubject(Long id) {
+        return subjectDAO.get(id);
+    }
+
+    public boolean updateSubject(Subject subject) {
+        return subjectDAO.update(subject);
+    }
+
+    public boolean deleteSubject(Subject subject) {
+        return subjectDAO.delete(subject);
+    }
+
+    public List<Subject> findAllSubjects() {
         return subjectDAO.findAll();
     }
 

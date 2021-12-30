@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `teachers`
     `last_name`  varchar(32) NOT NULL,
     `first_name` varchar(32) NOT NULL,
     `patronymic` varchar(32) NOT NULL,
-    `subject_id` bigint,
+    `subject_id` int NOT NULL,
     PRIMARY KEY (`id`),
     KEY `subject_id` (`subject_id`)
 ) ENGINE = InnoDB

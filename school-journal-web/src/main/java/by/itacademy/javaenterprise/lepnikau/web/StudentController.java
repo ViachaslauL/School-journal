@@ -1,22 +1,42 @@
 package by.itacademy.javaenterprise.lepnikau.web;
 
+import by.itacademy.javaenterprise.lepnikau.entity.Student;
 import by.itacademy.javaenterprise.lepnikau.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("/student")
 public class StudentController {
 
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/student")
-    @ResponseBody
-    public String findStudent(@RequestBody String id) {
-        return studentService.findStudent(id).toString();
+    @GetMapping("/find")
+    public Student findStudent(@RequestBody String id) {
+        return studentService.findStudent(id);
     }
+
+    @GetMapping("/find/all")
+    public List<Student> findAllStudents() {
+        return studentService.findAllStudents();
+    }
+
+    @PostMapping("/save")
+    public Student saveStudent(@RequestBody Student student) {
+        return studentService.saveStudent(student);
+    }
+
+    @PostMapping("/update")
+    public boolean updateStudent(@RequestBody Student student) {
+        return studentService.updateStudent(student);
+    }
+
+    @PostMapping("/delete")
+    public boolean deleteStudent(@RequestBody Student student) {
+        return studentService.deleteStudent(student);
+    }
+
 }

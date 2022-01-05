@@ -1,16 +1,18 @@
 package by.itacademy.javaenterprise.lepnikau.web;
 
+import by.itacademy.javaenterprise.lepnikau.dto.SubjectDTO;
 import by.itacademy.javaenterprise.lepnikau.entity.Subject;
 import by.itacademy.javaenterprise.lepnikau.service.SubjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
+@RequestMapping("/subject")
 public class SubjectController {
 
     private static final Logger LOG = LoggerFactory.getLogger(SubjectController.class);
@@ -18,62 +20,66 @@ public class SubjectController {
     @Autowired
     private SubjectService subjectService;
 
-    @GetMapping("/find_subject")
-    public String findSubject(@RequestBody String id) {
+    @GetMapping("/find")
+    public SubjectDTO findSubject(@RequestBody String id) {
         Subject subject = subjectService.findSubject(Long.parseLong(id));
 
-        StringBuilder responseBody = new StringBuilder();
-        responseBody
-                .append("[")
-                .append("subject id: '").append(subject.getId()).append("', ")
-                .append("subject name: '").append(subject.getName()).append("'")
-                .append("]");
-
-        return responseBody.toString();
+        return SubjectDTO.builder()
+                .subjectId(subject.getSubjectId())
+                .subjectName(subject.getSubjectName())
+                .teachers(subject.getTeachers())
+                .build();
     }
 
-    @GetMapping("/subjects")
-    public String findAllSubjects() {
-        StringBuilder responseBody = new StringBuilder();
-
+    @GetMapping("/find/all")
+    public List<SubjectDTO> findAllSubjects() {
+        List<SubjectDTO> subjectDTOs = new ArrayList<>();
         for (Subject subject : subjectService.findAllSubjects()) {
-            responseBody
-                    .append("[")
-                    .append("subject id: '").append(subject.getId()).append("'")
-                    .append(", ")
-                    .append("subject name: '").append(subject.getName()).append("'")
-                    .append("]\n");
+            subjectDTOs.add(
+                    SubjectDTO.builder()
+                            .subjectId(subject.getSubjectId())
+                            .subjectName(subject.getSubjectName())
+                            .teachers(subject.getTeachers())
+                            .build()
+            );
         }
 
-        return responseBody.toString();
+        return subjectDTOs;
     }
 
-    @PostMapping("/save_subject")
-    public String saveSubject(@RequestBody Subject subject) {
-        Subject savedSubject = subjectService.saveSubject(subject);
+    @PostMapping("/save")
+    public SubjectDTO saveSubject(@RequestBody SubjectDTO subject) {
 
-        StringBuilder responseBody = new StringBuilder();
+        Subject savedSubject = subjectService.saveSubject(
+                Subject.builder()
+                        .subjectName(subject.getSubjectName())
+                        .build()
+        );
 
-        if (savedSubject != null) {
-            responseBody
-                    .append("Subject: [").append(subject.toString()).append("]")
-                    .append(" saved to database.");
-        } else {
-            responseBody
-                    .append("Something gone wrong.");
-        }
+        return SubjectDTO.builder()
+                .subjectId(savedSubject.getSubjectId())
+                .subjectName(savedSubject.getSubjectName())
+                .build();
+    }
 
-        return responseBody.toString();
-     }
+    @PostMapping("/update")
+    public String updateSubject(@RequestBody SubjectDTO subjectDTO) {
+        Subject subject = Subject.builder()
+                .subjectId(subjectDTO.getSubjectId())
+                .subjectName(subjectDTO.getSubjectName())
+                .build();
 
-    @PostMapping("/update_subject")
-    public String updateSubject(@RequestBody Subject subject) {
         boolean isUpdate = subjectService.updateSubject(subject);
         return isUpdate ? "true" : "false";
     }
 
-    @PostMapping("/delete_subject")
-    public String deleteSubject(@RequestBody Subject subject) {
+    @PostMapping("/delete")
+    public String deleteSubject(@RequestBody SubjectDTO subjectDTO) {
+        Subject subject = Subject.builder()
+                .subjectId(subjectDTO.getSubjectId())
+                .subjectName(subjectDTO.getSubjectName())
+                .build();
+
         boolean isDeleted = subjectService.deleteSubject(subject);
         return isDeleted ? "true" : "false";
     }

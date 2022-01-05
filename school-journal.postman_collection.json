@@ -1,0 +1,718 @@
+{
+	"info": {
+		"_postman_id": "8c5dcc77-4144-4e38-b372-d8bfe4cb5bd1",
+		"name": "school-journal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "schoolClass",
+			"item": [
+				{
+					"name": "localhost:8080/school_class/find",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "1"
+						},
+						"url": {
+							"raw": "localhost:8080/school_class/find",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"school_class",
+								"find"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/school_class/find/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/school_class/find/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"school_class",
+								"find",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/school_class/save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"number\":7,\r\n    \"letter\":\"E\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/school_class/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"school_class",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/school_class/update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":5,\r\n    \"number\":7,\r\n    \"letter\":\"E\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/school_class/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"school_class",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/school_class/delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":10,\r\n    \"number\":10,\r\n    \"letter\":\"D\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/school_class/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"school_class",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "subject",
+			"item": [
+				{
+					"name": "localhost:8080/subject/find",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "2"
+						},
+						"url": {
+							"raw": "localhost:8080/subject/find",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"subject",
+								"find"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/subject/find/all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/subject/find/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"subject",
+								"find",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/subject/save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"subjectName\":\"Some\"}"
+						},
+						"url": {
+							"raw": "localhost:8080/subject/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"subject",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/subject/update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"subjectId\":11, \"subjectName\":\"Some subject\"}"
+						},
+						"url": {
+							"raw": "localhost:8080/subject/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"subject",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/subject/delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"subjectId\":11,\"subjectName\":\"Some another subject\"}"
+						},
+						"url": {
+							"raw": "localhost:8080/subject/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"subject",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "teacher",
+			"item": [
+				{
+					"name": "localhost:8080/teacher/find",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "5"
+						},
+						"url": {
+							"raw": "localhost:8080/teacher/find",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"find"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/teacher/find/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/teacher/find/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"find",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/teacher/save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastName\":\"Lepnikau\",\r\n    \"firstName\":\"Viachaslau\",\r\n    \"patronymic\":\"Viktorovich\",\r\n    \"subjectId\":1\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/teacher/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/teacher/update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":12,\r\n    \"lastName\":\"Лепников\",\r\n    \"firstName\":\"Вячеслав\",\r\n    \"patronymic\":\"Викторович\",\r\n    \"subjectId\":2\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/teacher/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/teacher/delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":13,\r\n    \"lastName\":\"Лепников\",\r\n    \"firstName\":\"Вячеслав\",\r\n    \"patronymic\":\"Викторович\",\r\n    \"subjectId\":2\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/teacher/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "student",
+			"item": [
+				{
+					"name": "localhost:8080/student/find",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "1",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/student/find",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"find"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/student/find/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/student/find/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"find",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/student/save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastName\": \"Лепников\",\r\n    \"firstName\": \"Вячеслав\",\r\n    \"patronymic\": \"Викторович\",\r\n    \"classId\": 5,\r\n    \"address\": {\r\n        \"street\": \"Leschinskogo\",\r\n        \"houseNumber\": 5,\r\n        \"flatNumber\": 63\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/student/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/student/update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":11,\r\n    \"lastName\":\"Лепников\",\r\n    \"firstName\":\"Вячеслав\",\r\n    \"patronymic\":\"Викторович\",\r\n    \"classId\":6,\r\n    \"address\":{\r\n        \"street\":\"Лещинского\",\r\n        \"houseNumber\":5,\r\n        \"flatNumber\":63\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/student/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/student/delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":11,\r\n    \"lastName\":\"Лепников\",\r\n    \"firstName\":\"Вячеслав\",\r\n    \"patronymic\":\"Викторович\",\r\n    \"classId\":6,\r\n    \"address\":{\r\n        \"street\":\"Лещинского\",\r\n        \"houseNumber\":5,\r\n        \"flatNumber\":63\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/student/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "parent",
+			"item": [
+				{
+					"name": "localhost:8080/parent/find",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "1"
+						},
+						"url": {
+							"raw": "localhost:8080/parent/find",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parent",
+								"find"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/parent/find/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/parent/find/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parent",
+								"find",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/parent/save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastName\":\"Куликов\",\r\n    \"firstName\":\"Александр\",\r\n    \"patronymic\":\"Иванович\",\r\n    \"studentId\":1\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/parent/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parent",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/parent/update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":11,\r\n    \"lastName\":\"Куликов\",\r\n    \"firstName\":\"Александр\",\r\n    \"patronymic\":\"Васильевич\",\r\n    \"studentId\":1\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/parent/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parent",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/parent/delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":11,\r\n    \"lastName\":\"Куликов\",\r\n    \"firstName\":\"Александр\",\r\n    \"patronymic\":\"Иванович\",\r\n    \"studentId\":1\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/parent/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parent",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

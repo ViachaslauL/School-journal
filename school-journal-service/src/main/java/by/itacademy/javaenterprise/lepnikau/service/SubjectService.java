@@ -34,7 +34,7 @@ public class SubjectService {
     }
 
     public List<Subject> findAllSubjects() {
-        return subjectDAO.findAll();
+        return subjectDAO.getAll();
     }
 
 }

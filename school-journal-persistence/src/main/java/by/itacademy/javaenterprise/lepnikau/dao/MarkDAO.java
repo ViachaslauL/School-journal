@@ -2,6 +2,8 @@ package by.itacademy.javaenterprise.lepnikau.dao;
 
 import by.itacademy.javaenterprise.lepnikau.entity.Mark;
 
-public interface MarkDAO extends DAO<Mark>{
+import java.util.List;
 
+public interface MarkDAO extends DAO<Mark>{
+    List<Mark> getAll();
 }

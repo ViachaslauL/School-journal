@@ -4,9 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@Data
 @Entity
-@Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +17,6 @@ public class Parent {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "student_id")
-    private Student studentId;
-
     @Column(name = "last_name")
     private String lastName;
 
@@ -31,14 +26,6 @@ public class Parent {
     @Column(name = "patronymic")
     private String patronymic;
 
-    @Override
-    public String toString() {
-        return "Parent{" +
-                "id=" + id +
-                ", studentId=" + studentId +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", patronymic='" + patronymic + '\'' +
-                '}';
-    }
+    @Column(name = "student_id")
+    private Long studentId;
 }

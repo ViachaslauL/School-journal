@@ -5,9 +5,11 @@ import by.itacademy.javaenterprise.lepnikau.entity.Student;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public class StudentDAOImpl implements StudentDAO {
@@ -22,81 +24,70 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
+    @Transactional
     public Student save(Student student) {
         if (student == null) throw new IllegalArgumentException();
 
         try {
-            entityManager.getTransaction().begin();
             entityManager.persist(student);
-            entityManager.getTransaction().commit();
+            return student;
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
-            entityManager.getTransaction().rollback();
         }
-        return student;
+        return null;
     }
 
     @Override
+    @Transactional
     public Student get(Long id) {
         if (id == null) throw new IllegalArgumentException();
 
-        Student student = null;
-
         try {
-            student = entityManager.find(Student.class, id);
+            return entityManager.find(Student.class, id);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return student;
+        return null;
     }
 
     @Override
+    @Transactional
+    public List<Student> getAll() {
+        return entityManager
+                .createQuery("select s from Student s", Student.class)
+                .getResultList();
+    }
+
+    @Override
+    @Transactional
     public boolean update(Student student) {
         if (student == null) throw new IllegalArgumentException();
 
-        Student fondedMark = null;
-
         try {
-            fondedMark = entityManager.find(Student.class, student.getId());
+            entityManager.merge(student);
+            return true;
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
 
-        if (fondedMark != null) {
-            try {
-                entityManager.getTransaction().begin();
-                entityManager.persist(student);
-                entityManager.getTransaction().commit();
-                return true;
-            } catch (Exception e) {
-                LOG.error(e.getMessage(), e);
-                entityManager.getTransaction().rollback();
-            }
-        }
         return false;
     }
 
     @Override
+    @Transactional
     public boolean delete(Student student) {
         if (student == null) throw new IllegalArgumentException();
 
         try {
-            student = entityManager.find(Student.class, student.getId());
+            Student foundedStudent = entityManager.find(Student.class, student.getId());
+            if (foundedStudent != null) {
+                entityManager.remove(foundedStudent);
+                return true;
+            }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
 
-        if (student != null) {
-            try {
-                entityManager.getTransaction().begin();
-                entityManager.remove(student);
-                entityManager.getTransaction().commit();
-                return true;
-            } catch (Exception e) {
-                LOG.error(e.getMessage(), e);
-                entityManager.getTransaction().rollback();
-            }
-        }
         return false;
     }
 }

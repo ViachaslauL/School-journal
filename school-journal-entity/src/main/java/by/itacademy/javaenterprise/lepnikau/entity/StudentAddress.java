@@ -1,9 +1,14 @@
 package by.itacademy.javaenterprise.lepnikau.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+@Data
+@NoArgsConstructor
 @Embeddable
+@Access(AccessType.PROPERTY)
 public class StudentAddress {
 
     @Column(name = "street")
@@ -14,13 +19,4 @@ public class StudentAddress {
 
     @Column(name = "flat_number")
     private Integer flatNumber;
-
-    @Override
-    public String toString() {
-        return "StudentAddress{" +
-                "street='" + street + '\'' +
-                ", houseNumber=" + houseNumber +
-                ", flatNumber=" + flatNumber +
-                '}';
-    }
 }

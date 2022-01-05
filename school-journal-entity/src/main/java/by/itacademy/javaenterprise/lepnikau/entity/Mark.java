@@ -1,19 +1,17 @@
 package by.itacademy.javaenterprise.lepnikau.entity;
 
 import lombok.*;
-import org.hibernate.annotations.Immutable;
 
 import javax.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
+@Data
 @Entity
-@Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Immutable
 @Table(name = "marks")
 public class Mark {
 
@@ -22,28 +20,23 @@ public class Mark {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "student_id")
+    private Long studentId;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "student_id")
-    private Student studentId;
+    @JoinColumn(name = "student_id", insertable = false, updatable = false)
+    private Student student;
 
     @Column(name = "mark")
     private int mark;
 
+    @Column(name = "subject_id")
+    private Long subjectId;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "subject_id")
-    private Subject subjectId;
+    @JoinColumn(name = "subject_id", insertable = false, updatable = false)
+    private Subject subject;
 
     @Column(name = "date")
     private Date date;
-
-    @Override
-    public String toString() {
-        return "Mark{" +
-                "id=" + id +
-                ", studentId=" + studentId +
-                ", mark=" + mark +
-                ", subjectId=" + subjectId +
-                ", date=" + date +
-                '}';
-    }
 }

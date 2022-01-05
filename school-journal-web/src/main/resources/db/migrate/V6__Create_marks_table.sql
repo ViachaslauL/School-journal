@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `marks`
 ALTER TABLE `marks`
     ADD CONSTRAINT `marks_ibfk_1`
     FOREIGN KEY (`subject_id`)
-    REFERENCES `subjects` (`id`)
+    REFERENCES `subjects` (`subject_id`)
     ON DELETE NO ACTION ON UPDATE NO ACTION,
 
     ADD CONSTRAINT `marks_ibfk_2`

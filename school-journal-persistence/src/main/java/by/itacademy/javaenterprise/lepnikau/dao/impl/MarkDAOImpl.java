@@ -4,11 +4,14 @@ import by.itacademy.javaenterprise.lepnikau.dao.MarkDAO;
 import by.itacademy.javaenterprise.lepnikau.entity.Mark;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
+@Repository
 public class MarkDAOImpl implements MarkDAO {
 
     private static final Logger LOG = LoggerFactory.getLogger(MarkDAOImpl.class);
@@ -39,14 +42,20 @@ public class MarkDAOImpl implements MarkDAO {
     public Mark get(Long id) {
         if (id == null) throw new IllegalArgumentException();
 
-        Mark mark = null;
-
         try {
-            mark = entityManager.find(Mark.class, id);
+            return entityManager.find(Mark.class, id);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return mark;
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public List<Mark> getAll() {
+        return entityManager
+                .createQuery("select m from Mark m", Mark.class)
+                .getResultList();
     }
 
     @Override
@@ -54,22 +63,13 @@ public class MarkDAOImpl implements MarkDAO {
     public boolean update(Mark mark) {
         if (mark == null) throw new IllegalArgumentException();
 
-        Mark foundedMark = null;
-
         try {
-            foundedMark = entityManager.find(Mark.class, mark.getId());
+            entityManager.merge(mark);
+            return true;
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
 
-        if (foundedMark != null) {
-            try {
-                entityManager.persist(mark);
-                return true;
-            } catch (Exception e) {
-                LOG.error(e.getMessage(), e);
-            }
-        }
         return false;
     }
 
@@ -79,22 +79,15 @@ public class MarkDAOImpl implements MarkDAO {
         if (mark == null) throw new IllegalArgumentException();
 
         try {
-            mark = entityManager.find(Mark.class, mark.getId());
+            Mark foundedMark = entityManager.find(Mark.class, mark.getId());
+            if (foundedMark != null) {
+                entityManager.remove(foundedMark);
+                return true;
+            }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
 
-        if (mark != null) {
-            try {
-                entityManager.getTransaction().begin();
-                entityManager.remove(mark);
-                entityManager.getTransaction().commit();
-                return true;
-            } catch (Exception e) {
-                LOG.error(e.getMessage(), e);
-                entityManager.getTransaction().rollback();
-            }
-        }
         return false;
     }
 }

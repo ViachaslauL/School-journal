@@ -4,10 +4,14 @@ import by.itacademy.javaenterprise.lepnikau.dao.ParentDAO;
 import by.itacademy.javaenterprise.lepnikau.entity.Parent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
+@Repository
 public class ParentDAOImpl implements ParentDAO {
 
     private static final Logger LOG = LoggerFactory.getLogger(ParentDAOImpl.class);
@@ -20,81 +24,70 @@ public class ParentDAOImpl implements ParentDAO {
     }
 
     @Override
+    @Transactional
     public Parent save(Parent parent) {
         if (parent == null) throw new IllegalArgumentException();
 
         try {
-            entityManager.getTransaction().begin();
             entityManager.persist(parent);
-            entityManager.getTransaction().commit();
+            return parent;
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
-            entityManager.getTransaction().rollback();
         }
-        return parent;
+        return null;
     }
 
     @Override
+    @Transactional
     public Parent get(Long id) {
         if (id == null) throw new IllegalArgumentException();
 
-        Parent parent = null;
-
         try {
-            parent = entityManager.find(Parent.class, id);
+            return entityManager.find(Parent.class, id);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return parent;
+        return null;
     }
 
     @Override
+    @Transactional
+    public List<Parent> getAll() {
+        return entityManager
+                .createQuery("select p from Parent p", Parent.class)
+                .getResultList();
+    }
+
+    @Override
+    @Transactional
     public boolean update(Parent parent) {
         if (parent == null) throw new IllegalArgumentException();
 
-        Parent fondedParent = null;
-
         try {
-            fondedParent = entityManager.find(Parent.class, parent.getId());
+            entityManager.merge(parent);
+            return true;
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
 
-        if (fondedParent != null) {
-            try {
-                entityManager.getTransaction().begin();
-                entityManager.persist(parent);
-                entityManager.getTransaction().commit();
-                return true;
-            } catch (Exception e) {
-                LOG.error(e.getMessage(), e);
-                entityManager.getTransaction().rollback();
-            }
-        }
         return false;
     }
 
     @Override
+    @Transactional
     public boolean delete(Parent parent) {
         if (parent == null) throw new IllegalArgumentException();
 
         try {
-            parent = entityManager.find(Parent.class, parent.getId());
+            Parent foundedParent = entityManager.find(Parent.class, parent.getId());
+            if (foundedParent != null) {
+                entityManager.remove(foundedParent);
+                return true;
+            }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
 
-        if (parent != null) {
-            try {
-                entityManager.getTransaction().begin();
-                entityManager.remove(parent);
-                entityManager.getTransaction().commit();
-                return true;
-            } catch (Exception e) {
-                LOG.error(e.getMessage(), e);
-                entityManager.getTransaction().rollback();
-            }
-        }
         return false;
     }
 }

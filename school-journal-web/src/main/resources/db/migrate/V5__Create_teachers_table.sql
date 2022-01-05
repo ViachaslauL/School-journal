@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS `teachers`
   DEFAULT CHARSET = utf8mb4;
 
 ALTER TABLE `teachers`
-    ADD CONSTRAINT `teachers_ibfk_1`
+    ADD CONSTRAINT `teachers_subjects_id_fk`
     FOREIGN KEY (`subject_id`)
-    REFERENCES `subjects` (`id`)
+    REFERENCES `subjects` (subject_id)
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 

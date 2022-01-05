@@ -5,10 +5,11 @@ import by.itacademy.javaenterprise.lepnikau.entity.SchoolClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public class SchoolClassDAOImpl implements SchoolClassDAO {
@@ -37,26 +38,58 @@ public class SchoolClassDAOImpl implements SchoolClassDAO {
     }
 
     @Override
+    @Transactional
     public SchoolClass get(Long id) {
         if (id == null) throw new IllegalArgumentException();
 
-        SchoolClass schoolClass = null;
-
         try {
-            schoolClass = entityManager.find(SchoolClass.class, id);
+            return entityManager.find(SchoolClass.class, id);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return schoolClass;
+        return null;
     }
 
     @Override
-    public boolean update(SchoolClass entity) {
+    @Transactional
+    public List<SchoolClass> getAll() {
+        return entityManager
+                .createQuery("select s from SchoolClass s", SchoolClass.class)
+                .getResultList();
+    }
+
+    @Override
+    @Transactional
+    public boolean update(SchoolClass schoolClass) {
+        if (schoolClass == null) throw new IllegalArgumentException();
+
+        try {
+            entityManager.merge(schoolClass);
+            return true;
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+
         return false;
     }
 
     @Override
-    public boolean delete(SchoolClass entity) {
+    @Transactional
+    public boolean delete(SchoolClass schoolClass) {
+        if (schoolClass == null) throw new IllegalArgumentException();
+
+        try {
+            SchoolClass foundedSchoolClass =
+                    entityManager.find(SchoolClass.class, schoolClass.getId());
+
+            if (foundedSchoolClass != null) {
+                entityManager.remove(foundedSchoolClass);
+                return true;
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+
         return false;
     }
 }

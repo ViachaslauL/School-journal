@@ -1,12 +1,14 @@
 package by.itacademy.javaenterprise.lepnikau.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.List;
 
+@Data
 @Entity
-@Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,22 +29,19 @@ public class Student {
     @Column(name = "patronymic")
     private String patronymic;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "class_id")
-    private SchoolClass classId;
+    @Column(name = "class_id")
+    private Long classId;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    private List<Parent> parents;
+
+    @AttributeOverrides({
+            @AttributeOverride(name = "street", column = @Column(name = "street")),
+            @AttributeOverride(name = "houseNumber", column = @Column(name = "house_number")),
+            @AttributeOverride(name = "flatNumber", column = @Column(name = "flat_number"))
+    })
     @Embedded
     private StudentAddress address;
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", patronymic='" + patronymic + '\'' +
-                ", classId=" + classId +
-                ", address=" + address +
-                '}';
-    }
 }

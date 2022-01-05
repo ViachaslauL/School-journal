@@ -50,7 +50,7 @@ public class SubjectDAOImpl implements SubjectDAO {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Subject> findAll() {
+    public List<Subject> getAll() {
         return entityManager
                 .createQuery("select s from Subject s", Subject.class)
                 .getResultList();
@@ -73,13 +73,17 @@ public class SubjectDAOImpl implements SubjectDAO {
 
     @Override
     @Transactional
-    public boolean delete(Subject detachedSubject) {
-        if (detachedSubject == null) throw new IllegalArgumentException();
+    public boolean delete(Subject subject) {
+        if (subject == null) throw new IllegalArgumentException();
 
         try {
-            Subject managedSubject = entityManager.merge(detachedSubject);
-            entityManager.remove(managedSubject);
-            return true;
+            Subject foundedSubject =
+                    entityManager.find(Subject.class, subject.getSubjectId());
+
+            if (entityManager.contains(foundedSubject)) {
+                entityManager.remove(foundedSubject);
+                return true;
+            }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }

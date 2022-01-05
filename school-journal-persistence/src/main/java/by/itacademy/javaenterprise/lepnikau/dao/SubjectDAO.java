@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface SubjectDAO extends DAO<Subject>{
 
-    List<Subject> findAll();
+    List<Subject> getAll();
 
 }

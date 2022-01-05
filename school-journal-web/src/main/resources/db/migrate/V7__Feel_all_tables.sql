@@ -40,17 +40,17 @@ INSERT INTO `teachers` (`first_name`, `last_name`, `patronymic`, `subject_id`) V
 ('Веснин', 'Юрий', 'Александрович', '9'),
 ('Васюков', 'Роман', 'Владимирович', '10');
 
-INSERT INTO `classes` (`number`, `character`) VALUES
+INSERT INTO `classes` (`number`, `letter`) VALUES
 ('8', 'A'),
-('8', 'A'),
+('8', 'E'),
 ('8', 'B'),
-('8', 'B'),
+('8', 'C'),
 ('9', 'A'),
 ('9', 'C'),
-('9', 'C'),
-('9', 'C'),
+('9', 'B'),
+('9', 'D'),
 ('10', 'D'),
-('10', 'D');
+('10', 'C');
 
 INSERT INTO `students` (`last_name`, `first_name`, `patronymic`, `class_id`, `street`, `house_number`, `flat_number`) VALUES
 ('Куликов', 'Роман', 'Александрович', '1', 'Some street one', '10', '110'),

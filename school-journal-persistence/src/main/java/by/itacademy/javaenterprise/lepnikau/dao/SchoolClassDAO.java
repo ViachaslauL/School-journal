@@ -2,6 +2,8 @@ package by.itacademy.javaenterprise.lepnikau.dao;
 
 import by.itacademy.javaenterprise.lepnikau.entity.SchoolClass;
 
-public interface SchoolClassDAO extends DAO<SchoolClass> {
+import java.util.List;
 
+public interface SchoolClassDAO extends DAO<SchoolClass> {
+    List<SchoolClass> getAll();
 }

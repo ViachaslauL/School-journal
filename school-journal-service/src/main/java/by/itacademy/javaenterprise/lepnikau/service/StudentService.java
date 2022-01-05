@@ -5,6 +5,8 @@ import by.itacademy.javaenterprise.lepnikau.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentService {
 
@@ -15,14 +17,23 @@ public class StudentService {
         this.studentDAO = studentDAO;
     }
 
+    public Student saveStudent(Student student) {
+        return studentDAO.save(student);
+    }
+
     public Student findStudent(String id) {
-        Long longId = Long.valueOf(id);
-        return studentDAO.get(longId);
+        return studentDAO.get(Long.valueOf(id));
     }
 
-    public boolean saveStudent(Student student) {
-        Student savedStudent = studentDAO.save(student);
-        return savedStudent != null;
+    public List<Student> findAllStudents() {
+        return studentDAO.getAll();
     }
 
+    public boolean updateStudent(Student student) {
+        return studentDAO.update(student);
+    }
+
+    public boolean deleteStudent(Student student) {
+        return studentDAO.delete(student);
+    }
 }

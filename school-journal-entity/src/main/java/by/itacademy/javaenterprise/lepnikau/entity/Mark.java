@@ -4,8 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @Entity
@@ -23,7 +22,7 @@ public class Mark {
     @Column(name = "student_id")
     private Long studentId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "student_id", insertable = false, updatable = false)
     private Student student;
 
@@ -33,10 +32,10 @@ public class Mark {
     @Column(name = "subject_id")
     private Long subjectId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "subject_id", insertable = false, updatable = false)
     private Subject subject;
 
-    @Column(name = "date")
+    @Column(name = "date", insertable = false)
     private Date date;
 }

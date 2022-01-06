@@ -1,6 +1,8 @@
 package by.itacademy.javaenterprise.lepnikau.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,6 +24,7 @@ public class Subject {
     private String subjectName;
 
     @OneToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
     @JoinColumn(name = "subject_id", referencedColumnName = "subject_id")
     private List<Teacher> teachers;
 }

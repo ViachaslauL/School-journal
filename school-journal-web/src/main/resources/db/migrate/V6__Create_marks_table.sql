@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `marks`
     `student_id` int NOT NULL,
     `mark`       int  NOT NULL,
     `subject_id` int NOT NULL,
-    `date`       date NOT NULL,
+    `date`       timestamp NOT NULL,
     PRIMARY KEY (`id`),
     KEY `subject_id` (`subject_id`),
     KEY `student_id` (`student_id`)

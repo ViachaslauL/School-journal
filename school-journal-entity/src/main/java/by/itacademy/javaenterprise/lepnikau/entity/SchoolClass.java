@@ -1,7 +1,8 @@
 package by.itacademy.javaenterprise.lepnikau.entity;
 
 import lombok.*;
-import net.bytebuddy.agent.builder.AgentBuilder;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
@@ -30,7 +31,8 @@ public class SchoolClass {
     private String classCode;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "class_id", referencedColumnName = "id")
+    @Fetch(FetchMode.SUBSELECT)
+    @JoinColumn(name = "class_id", referencedColumnName = "id", updatable = false)
     private List<Student> students;
 }
 

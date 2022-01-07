@@ -80,7 +80,7 @@ public class SubjectDAOImpl implements SubjectDAO {
             Subject foundedSubject =
                     entityManager.find(Subject.class, subject.getSubjectId());
 
-            if (entityManager.contains(foundedSubject)) {
+            if (foundedSubject != null) {
                 entityManager.remove(foundedSubject);
                 return true;
             }

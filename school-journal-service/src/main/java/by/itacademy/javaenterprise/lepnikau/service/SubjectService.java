@@ -4,10 +4,12 @@ import by.itacademy.javaenterprise.lepnikau.dao.SubjectDAO;
 import by.itacademy.javaenterprise.lepnikau.entity.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class SubjectService {
 
     private final SubjectDAO subjectDAO;
@@ -25,6 +27,10 @@ public class SubjectService {
         return subjectDAO.get(id);
     }
 
+    public List<Subject> findAllSubjects() {
+        return subjectDAO.getAll();
+    }
+
     public boolean updateSubject(Subject subject) {
         return subjectDAO.update(subject);
     }
@@ -32,9 +38,4 @@ public class SubjectService {
     public boolean deleteSubject(Subject subject) {
         return subjectDAO.delete(subject);
     }
-
-    public List<Subject> findAllSubjects() {
-        return subjectDAO.getAll();
-    }
-
 }

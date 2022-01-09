@@ -1,11 +1,15 @@
 package by.itacademy.javaenterprise.lepnikau.entity;
 
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.jpa.QueryHints;
 
 import javax.persistence.*;
 import java.util.List;
+
+import static org.hibernate.jpa.QueryHints.HINT_PASS_DISTINCT_THROUGH;
 
 @Data
 @Entity
@@ -34,7 +38,7 @@ public class Student {
 
     @OneToMany(fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    @JoinColumn(name = "student_id", insertable = false, updatable = false)
     private List<Parent> parents;
 
     @AttributeOverrides({
@@ -43,5 +47,5 @@ public class Student {
             @AttributeOverride(name = "flatNumber", column = @Column(name = "flat_number"))
     })
     @Embedded
-    private StudentAddress address;
+    private Address address;
 }

@@ -3,7 +3,6 @@ package by.itacademy.javaenterprise.lepnikau.service;
 import by.itacademy.javaenterprise.lepnikau.dao.SchoolClassDAO;
 import by.itacademy.javaenterprise.lepnikau.entity.SchoolClass;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.config.ScheduledTaskHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

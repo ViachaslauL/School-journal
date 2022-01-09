@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `parents`
 (
     `id`         int NOT NULL AUTO_INCREMENT,
-    `student_id` int NOT NULL,
+    `student_id` int NULL,
     `last_name`  varchar(32) NOT NULL,
     `first_name` varchar(32) NOT NULL,
     `patronymic` varchar(32) NOT NULL,

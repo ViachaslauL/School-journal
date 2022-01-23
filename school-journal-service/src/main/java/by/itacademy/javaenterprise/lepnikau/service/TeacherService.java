@@ -1,37 +1,56 @@
 package by.itacademy.javaenterprise.lepnikau.service;
 
 import by.itacademy.javaenterprise.lepnikau.dao.TeacherDAO;
+import by.itacademy.javaenterprise.lepnikau.dto.TeacherDTO;
 import by.itacademy.javaenterprise.lepnikau.entity.Teacher;
+import by.itacademy.javaenterprise.lepnikau.modelmapper.TeacherMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
 public class TeacherService {
 
+    private final TeacherDAO teacherDAO;
+    private final TeacherMapper teacherMapper;
+
     @Autowired
-    private TeacherDAO teacherDAO;
-
-    public Teacher findTeacher(Long id) {
-        return teacherDAO.get(id);
+    public TeacherService(
+            TeacherDAO teacherDAO,
+            TeacherMapper teacherMapper
+    ) {
+        this.teacherDAO = teacherDAO;
+        this.teacherMapper = teacherMapper;
     }
 
-    public List<Teacher> findAllTeachers() {
-        return teacherDAO.getAll();
+    public List<TeacherDTO> findAllTeachers() {
+        List<TeacherDTO> teacherDTOList = new ArrayList<>();
+
+        for (Teacher teacher : teacherDAO.getAll()) {
+            teacherDTOList.add(teacherMapper.toDto(teacher));
+        }
+
+        return teacherDTOList;
     }
 
-    public Teacher saveTeacher(Teacher teacher) {
-        return teacherDAO.save(teacher);
+    public TeacherDTO findTeacher(Long id) {
+        return teacherMapper.toDto(teacherDAO.get(id));
     }
 
-    public boolean updateTeacher(Teacher teacher) {
-        return teacherDAO.update(teacher);
+    public TeacherDTO saveTeacher(TeacherDTO teacherDTO) {
+        Teacher savedTeacher = teacherDAO.save(teacherMapper.toEntity(teacherDTO));
+        return teacherMapper.toDto(savedTeacher);
     }
 
-    public boolean deleteTeacher(Teacher teacher) {
-        return teacherDAO.delete(teacher);
+    public boolean updateTeacher(TeacherDTO teacherDTO) {
+        return teacherDAO.update(teacherMapper.toEntity(teacherDTO));
+    }
+
+    public boolean deleteTeacher(TeacherDTO teacherDTO) {
+        return teacherDAO.delete(teacherMapper.toEntity(teacherDTO));
     }
 }

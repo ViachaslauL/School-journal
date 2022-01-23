@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `students`
     `last_name`  varchar(32) NOT NULL,
     `first_name` varchar(32) NOT NULL,
     `patronymic` varchar(32) NOT NULL,
-    `class_id`   int NOT NULL,
+    `class_id`   int NULL,
     `street` varchar(255) NOT NULL,
     `house_number` int NOT NULL,
     `flat_number` int NOT NULL,
@@ -18,4 +18,4 @@ ALTER TABLE `students`
     ADD CONSTRAINT `students_ibfk_4`
     FOREIGN KEY (`class_id`)
     REFERENCES `classes` (`id`)
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE SET NULL ON UPDATE CASCADE ;

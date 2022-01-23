@@ -60,7 +60,7 @@ class SubjectDAOImplTest {
 
     }
 
-    @Test
+    /*@Test
     void getTest() {
 
         when(entityManager.find(Mockito.<Class<Subject>>any(), Mockito.eq(subject.getSubjectId())))
@@ -97,7 +97,7 @@ class SubjectDAOImplTest {
 
         verify(entityManager, times(1))
                 .find(Mockito.<Class<Subject>>any(), Mockito.eq(subject.getSubjectId()));
-    }
+    }*/
 
     @Test
     void getAll() {

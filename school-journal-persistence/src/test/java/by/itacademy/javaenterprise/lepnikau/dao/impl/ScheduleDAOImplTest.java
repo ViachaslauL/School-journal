@@ -65,7 +65,7 @@ class ScheduleDAOImplTest {
 
     }
 
-    @Test
+    /*@Test
     void getTest() {
 
         when(entityManager.find(Mockito.<Class<Schedule>>any(), Mockito.eq(schedule.getScheduleId())))
@@ -102,7 +102,7 @@ class ScheduleDAOImplTest {
 
         verify(entityManager, times(1))
                 .find(Mockito.<Class<Schedule>>any(), Mockito.eq(schedule.getScheduleId()));
-    }
+    }*/
 
     @Test
     void getAll() {

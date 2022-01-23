@@ -1,42 +1,47 @@
 package by.itacademy.javaenterprise.lepnikau.web;
 
-import by.itacademy.javaenterprise.lepnikau.entity.Student;
+import by.itacademy.javaenterprise.lepnikau.dto.StudentDTO;
 import by.itacademy.javaenterprise.lepnikau.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/students")
 public class StudentController {
 
-    @Autowired
-    private StudentService studentService;
+    private final StudentService studentService;
 
-    @GetMapping("/find")
-    public Student findStudent(@RequestBody String id) {
-        return studentService.findStudent(id);
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
-    @GetMapping("/find/all")
-    public List<Student> findAllStudents() {
+    @GetMapping
+    public Set<StudentDTO> findAllStudents() {
         return studentService.findAllStudents();
     }
 
+    @GetMapping("/{id}")
+    public StudentDTO findStudent(@PathVariable String id) {
+        return studentService.findStudent(Long.parseLong(id));
+    }
+
     @PostMapping("/save")
-    public Student saveStudent(@RequestBody Student student) {
-        return studentService.saveStudent(student);
+    public StudentDTO saveStudent(@RequestBody StudentDTO studentDTO) {
+        return studentService.saveStudent(studentDTO);
     }
 
     @PostMapping("/update")
-    public boolean updateStudent(@RequestBody Student student) {
-        return studentService.updateStudent(student);
+    public boolean updateStudent(@RequestBody StudentDTO studentDTO) {
+        return studentService.updateStudent(studentDTO);
     }
 
     @PostMapping("/delete")
-    public boolean deleteStudent(@RequestBody Student student) {
-        return studentService.deleteStudent(student);
+    public boolean deleteStudent(@RequestBody StudentDTO studentDTO) {
+        return studentService.deleteStudent(studentDTO);
     }
 
 }

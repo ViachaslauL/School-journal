@@ -1,39 +1,65 @@
 package by.itacademy.javaenterprise.lepnikau.service;
 
+import by.itacademy.javaenterprise.lepnikau.dao.ParentDAO;
 import by.itacademy.javaenterprise.lepnikau.dao.StudentDAO;
+import by.itacademy.javaenterprise.lepnikau.dto.StudentDTO;
+import by.itacademy.javaenterprise.lepnikau.entity.Parent;
 import by.itacademy.javaenterprise.lepnikau.entity.Student;
+import by.itacademy.javaenterprise.lepnikau.modelmapper.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class StudentService {
 
-    private StudentDAO studentDAO;
+    private final StudentDAO studentDAO;
+    private final StudentMapper studentMapper;
+    private final ParentDAO parentDAO;
 
     @Autowired
-    public StudentService(StudentDAO studentDAO) {
+    public StudentService(
+            StudentDAO studentDAO,
+            StudentMapper studentMapper,
+            ParentDAO parentDAO
+    ) {
         this.studentDAO = studentDAO;
+        this.studentMapper = studentMapper;
+        this.parentDAO = parentDAO;
     }
 
-    public Student saveStudent(Student student) {
-        return studentDAO.save(student);
+    public StudentDTO findStudent(Long id) {
+        return studentMapper.toDto(studentDAO.get(id));
     }
 
-    public Student findStudent(String id) {
-        return studentDAO.get(Long.valueOf(id));
+    public Set<StudentDTO> findAllStudents() {
+        LinkedHashSet<StudentDTO> studentsDTO = new LinkedHashSet<>();
+
+        for (Student student : studentDAO.getAll()) {
+            studentsDTO.add(studentMapper.toDto(student));
+        }
+
+        return studentsDTO;
     }
 
-    public List<Student> findAllStudents() {
-        return studentDAO.getAll();
+    public StudentDTO saveStudent(StudentDTO studentDTO) {
+        Student savedStudent =
+                studentDAO.save(studentMapper.toEntity(studentDTO));
+
+        for (Parent parent : savedStudent.getParents()) {
+            parent.setStudentId(savedStudent.getId());
+            parentDAO.save(parent);
+        }
+
+        return studentMapper.toDto(savedStudent);
     }
 
-    public boolean updateStudent(Student student) {
-        return studentDAO.update(student);
+    public boolean updateStudent(StudentDTO studentDTO) {
+        return studentDAO.update(studentMapper.toEntity(studentDTO));
     }
 
-    public boolean deleteStudent(Student student) {
-        return studentDAO.delete(student);
+    public boolean deleteStudent(StudentDTO studentDTO) {
+        return studentDAO.delete(studentMapper.toEntity(studentDTO));
     }
 }

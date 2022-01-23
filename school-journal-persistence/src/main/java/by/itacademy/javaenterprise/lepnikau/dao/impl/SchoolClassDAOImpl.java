@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -43,7 +45,14 @@ public class SchoolClassDAOImpl implements SchoolClassDAO {
         if (id == null) throw new IllegalArgumentException();
 
         try {
-            return entityManager.find(SchoolClass.class, id);
+            TypedQuery<SchoolClass> query = entityManager.createQuery(
+                    "select sc from SchoolClass sc where sc.id=:id",
+                    SchoolClass.class
+            );
+
+            query.setParameter("id", id);
+
+            return query.getSingleResult();
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }

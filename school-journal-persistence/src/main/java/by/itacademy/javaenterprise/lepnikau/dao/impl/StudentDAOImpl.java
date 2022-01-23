@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
+import javax.persistence.TypedQuery;
+import java.util.*;
 
 @Repository
 public class StudentDAOImpl implements StudentDAO {
@@ -43,7 +45,17 @@ public class StudentDAOImpl implements StudentDAO {
         if (id == null) throw new IllegalArgumentException();
 
         try {
-            return entityManager.find(Student.class, id);
+            EntityGraph<?> entityGraph =
+                    entityManager.createEntityGraph("graph.studentsParents");
+
+            TypedQuery<Student> query = entityManager.createQuery(
+                    "select s from Student s where s.id=:id",
+                    Student.class
+            ).setHint("javax.persistence.fetchgraph", entityGraph);
+
+            query.setParameter("id", id);
+            return query.getSingleResult();
+
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -52,10 +64,16 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     @Transactional
-    public List<Student> getAll() {
-        return entityManager
-                .createQuery("select s from Student s", Student.class)
-                .getResultList();
+    public Set<Student> getAll() {
+        try {
+            List<Student> resultList = entityManager
+                    .createQuery("select s from Student s left join fetch s.parents", Student.class)
+                    .getResultList();
+            return new LinkedHashSet<>(resultList);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return new LinkedHashSet<>();
     }
 
     @Override
@@ -89,5 +107,24 @@ public class StudentDAOImpl implements StudentDAO {
         }
 
         return false;
+    }
+
+    @Override
+    @Transactional
+    public Set<Student> getStudentsBySchoolClassId(Long schoolClassId) {
+        if (schoolClassId == null) throw new IllegalArgumentException();
+
+        try {
+            TypedQuery<Student> query = entityManager.createQuery(
+                    "select s from Student s left join fetch s.parents where s.classId=:schoolClassId",
+                    Student.class
+            );
+            query.setParameter("schoolClassId", schoolClassId);
+
+            return new LinkedHashSet<>(query.getResultList());
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return new LinkedHashSet<>();
     }
 }

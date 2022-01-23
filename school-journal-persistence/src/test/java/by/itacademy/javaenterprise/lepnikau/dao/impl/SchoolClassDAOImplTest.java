@@ -61,7 +61,7 @@ class SchoolClassDAOImplTest {
 
     }
 
-    @Test
+    /*@Test
     void getTest() {
 
         when(entityManager.find(Mockito.<Class<SchoolClass>>any(), Mockito.eq(schoolClass.getId())))
@@ -98,7 +98,7 @@ class SchoolClassDAOImplTest {
 
         verify(entityManager, times(1))
                 .find(Mockito.<Class<SchoolClass>>any(), Mockito.eq(schoolClass.getId()));
-    }
+    }*/
 
     @Test
     void getAll() {

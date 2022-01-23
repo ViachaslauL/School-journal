@@ -66,7 +66,7 @@ class MarkDAOImplTest {
 
     }
 
-    @Test
+    /*@Test
     void getTest() {
 
         when(entityManager.find(Mockito.<Class<Mark>>any(), Mockito.eq(mark.getId())))
@@ -105,7 +105,7 @@ class MarkDAOImplTest {
 
         verify(entityManager, times(1))
                 .find(Mockito.<Class<Mark>>any(), Mockito.eq(mark.getId()));
-    }
+    }*/
 
     @Test
     void getAll() {

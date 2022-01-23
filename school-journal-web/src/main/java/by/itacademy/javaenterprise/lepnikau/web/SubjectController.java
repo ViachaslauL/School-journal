@@ -1,6 +1,6 @@
 package by.itacademy.javaenterprise.lepnikau.web;
 
-import by.itacademy.javaenterprise.lepnikau.entity.Subject;
+import by.itacademy.javaenterprise.lepnikau.dto.SubjectDTO;
 import by.itacademy.javaenterprise.lepnikau.service.SubjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,43 +10,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/subject")
+@RequestMapping("/subjects")
 public class SubjectController {
 
     private static final Logger LOG = LoggerFactory.getLogger(SubjectController.class);
 
-    @Autowired
-    private SubjectService subjectService;
+    private final SubjectService subjectService;
 
-    @GetMapping("/find")
-    public Subject findSubject(@RequestBody String id) {
-        return subjectService.findSubject(Long.parseLong(id));
+    @Autowired
+    public SubjectController(SubjectService subjectService) {
+        this.subjectService = subjectService;
     }
 
-    @GetMapping("/find/all")
-    public List<Subject> findAllSubjects() {
+    @GetMapping
+    public List<SubjectDTO> findAllSubjects() {
         return subjectService.findAllSubjects();
     }
 
+    @GetMapping("/{id}")
+    public SubjectDTO findSubject(@PathVariable String id) {
+        return subjectService.findSubject(Long.parseLong(id));
+    }
+
     @PostMapping("/save")
-    public Subject saveSubject(@RequestBody Subject subject) {
-        return subjectService.saveSubject(subject);
+    public SubjectDTO saveSubject(@RequestBody SubjectDTO subjectDTO) {
+        return subjectService.saveSubject(subjectDTO);
     }
 
     @PostMapping("/update")
-    public String updateSubject(@RequestBody Subject subject) {
-        if (subjectService.updateSubject(subject)) {
-            return "true";
-        }
-        return "false";
+    public boolean updateSubject(@RequestBody SubjectDTO subjectDTO) {
+        return subjectService.updateSubject(subjectDTO);
     }
 
     @PostMapping("/delete")
-    public String deleteSubject(@RequestBody Subject subject) {
-        if (subjectService.deleteSubject(subject)) {
-            return "true";
-        }
-        return "false";
+    public boolean deleteSubject(@RequestBody SubjectDTO subjectDTO) {
+        return subjectService.deleteSubject(subjectDTO);
     }
 
 }

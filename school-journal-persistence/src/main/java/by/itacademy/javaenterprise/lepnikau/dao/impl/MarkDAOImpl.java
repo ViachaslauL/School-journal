@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -25,6 +27,47 @@ public class MarkDAOImpl implements MarkDAO {
 
     @Override
     @Transactional
+    public Mark get(Long receivedId) {
+        if (receivedId == null) throw new IllegalArgumentException();
+
+        try {
+            TypedQuery<Mark> query = entityManager.createQuery(
+                    "select m from Mark m " +
+                            "left join fetch m.student st " +
+                            "left join fetch st.parents " +
+                            "left join fetch m.subject sb " +
+                            "left join fetch sb.teachers where m.id=:receivedId",
+                    Mark.class
+            );
+            query.setParameter("receivedId", receivedId);
+            return query.getSingleResult();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public List<Mark> getAll() {
+        try {
+            return entityManager
+                    .createQuery(
+                            "select m from Mark m " +
+                                    "left join fetch m.student st " +
+                                    "left join fetch st.parents " +
+                                    "left join fetch m.subject sb " +
+                                    "left join fetch sb.teachers",
+                            Mark.class
+                    ).getResultList();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return new ArrayList<>();
+    }
+
+    @Override
+    @Transactional
     public Mark save(Mark mark) {
         if (mark == null) throw new IllegalArgumentException();
 
@@ -35,27 +78,6 @@ public class MarkDAOImpl implements MarkDAO {
             LOG.error(e.getMessage(), e);
         }
         return null;
-    }
-
-    @Override
-    @Transactional
-    public Mark get(Long id) {
-        if (id == null) throw new IllegalArgumentException();
-
-        try {
-            return entityManager.find(Mark.class, id);
-        } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        }
-        return null;
-    }
-
-    @Override
-    @Transactional
-    public List<Mark> getAll() {
-        return entityManager
-                .createQuery("select m from Mark m", Mark.class)
-                .getResultList();
     }
 
     @Override

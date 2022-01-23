@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -40,8 +42,17 @@ public class SubjectDAOImpl implements SubjectDAO {
     @Override
     @Transactional
     public Subject get(Long id) {
+        if (id == null) throw new IllegalArgumentException();
+
         try {
-            return entityManager.find(Subject.class, id);
+            TypedQuery<Subject> query = entityManager.createQuery(
+                    "select s from Subject s left join fetch s.teachers where s.subjectId=:id",
+                    Subject.class
+            );
+
+            query.setParameter("id", id);
+
+            return query.getSingleResult();
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -51,9 +62,14 @@ public class SubjectDAOImpl implements SubjectDAO {
     @Override
     @Transactional(readOnly = true)
     public List<Subject> getAll() {
-        return entityManager
-                .createQuery("select s from Subject s", Subject.class)
-                .getResultList();
+        try {
+            return entityManager
+                    .createQuery("select s from Subject s left join fetch s.teachers", Subject.class)
+                    .getResultList();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return new ArrayList<>();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package by.itacademy.javaenterprise.lepnikau.web;
 
-import by.itacademy.javaenterprise.lepnikau.entity.Mark;
+import by.itacademy.javaenterprise.lepnikau.dto.MarkDTO;
 import by.itacademy.javaenterprise.lepnikau.service.MarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,34 +8,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/mark")
+@RequestMapping("/marks")
 public class MarkController {
 
-    @Autowired
-    private MarkService markService;
+    private final MarkService markService;
 
-    @GetMapping("/find")
-    public Mark findMark(@RequestBody String markId) {
-        return markService.findMark(Long.parseLong(markId));
+    @Autowired
+    public MarkController(MarkService markService) {
+        this.markService = markService;
     }
 
-    @GetMapping("/find/all")
-    public List<Mark> findAllMarks() {
-        return markService.getAllMarks();
+    @GetMapping
+    public List<MarkDTO> findAllMarks() {
+        return markService.findAllMarks();
+    }
+
+    @GetMapping("/{id}")
+    public MarkDTO findMark(@PathVariable String id) {
+        return markService.findMark(Long.parseLong(id));
     }
 
     @PostMapping("/save")
-    public Mark saveMark(@RequestBody Mark mark) {
-        return markService.saveMark(mark);
+    public MarkDTO saveMark(@RequestBody MarkDTO markDTO) {
+        return markService.saveMark(markDTO);
     }
 
     @PostMapping("/update")
-    public boolean updateMark(@RequestBody Mark mark) {
-        return markService.updateMark(mark);
+    public boolean updateMark(@RequestBody MarkDTO markDTO) {
+        return markService.updateMark(markDTO);
     }
 
     @PostMapping("/delete")
-    public boolean deleteMark(@RequestBody Mark mark) {
-        return markService.deleteMark(mark);
+    public boolean deleteMark(@RequestBody MarkDTO markDTO) {
+        return markService.deleteMark(markDTO);
     }
 }

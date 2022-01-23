@@ -1,6 +1,6 @@
 package by.itacademy.javaenterprise.lepnikau.web;
 
-import by.itacademy.javaenterprise.lepnikau.entity.Teacher;
+import by.itacademy.javaenterprise.lepnikau.dto.TeacherDTO;
 import by.itacademy.javaenterprise.lepnikau.service.TeacherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,36 +10,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/teacher")
+@RequestMapping("/teachers")
 public class TeacherController {
 
     private static final Logger LOG = LoggerFactory.getLogger(TeacherController.class);
 
-    @Autowired
-    private TeacherService teacherService;
+    private final TeacherService teacherService;
 
-    @GetMapping("/find")
-    public Teacher findTeacher(@RequestBody String id) {
-        return teacherService.findTeacher(Long.parseLong(id));
+    @Autowired
+    public TeacherController(TeacherService teacherService) {
+        this.teacherService = teacherService;
     }
 
-    @GetMapping("/find/all")
-    public List<Teacher> findAllTeachers() {
+    @GetMapping
+    public List<TeacherDTO> findAllTeachers() {
         return teacherService.findAllTeachers();
     }
 
+    @GetMapping("/{id}")
+    public TeacherDTO findTeacher(@PathVariable String id) {
+        return teacherService.findTeacher(Long.parseLong(id));
+    }
+
     @PostMapping("/save")
-    public Teacher saveTeacher(@RequestBody Teacher teacher) {
-       return teacherService.saveTeacher(teacher);
+    public TeacherDTO saveTeacher(@RequestBody TeacherDTO teacherDTO) {
+       return teacherService.saveTeacher(teacherDTO);
     }
 
     @PostMapping("/update")
-    public boolean updateTeacher(@RequestBody Teacher teacher) {
-        return teacherService.updateTeacher(teacher);
+    public boolean updateTeacher(@RequestBody TeacherDTO teacherDTO) {
+        return teacherService.updateTeacher(teacherDTO);
     }
 
     @PostMapping("/delete")
-    public boolean deleteTeacher(@RequestBody Teacher teacher) {
-        return teacherService.deleteTeacher(teacher);
+    public boolean deleteTeacher(@RequestBody TeacherDTO teacherDTO) {
+        return teacherService.deleteTeacher(teacherDTO);
     }
 }

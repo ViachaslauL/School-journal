@@ -1,6 +1,6 @@
 package by.itacademy.javaenterprise.lepnikau.web;
 
-import by.itacademy.javaenterprise.lepnikau.entity.Parent;
+import by.itacademy.javaenterprise.lepnikau.dto.ParentDTO;
 import by.itacademy.javaenterprise.lepnikau.service.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,34 +8,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/parent")
+@RequestMapping("/parents")
 public class ParentController {
 
-    @Autowired
-    private ParentService parentService;
+    private final ParentService parentService;
 
-    @GetMapping("/find")
-    public Parent findParent(@RequestBody String id) {
-        return parentService.find(Long.parseLong(id));
+    @Autowired
+    public ParentController(ParentService parentService) {
+        this.parentService = parentService;
     }
 
-    @GetMapping("/find/all")
-    public List<Parent> finaAllParents() {
+    @GetMapping
+    public List<ParentDTO> finaAllParents() {
         return parentService.findAllParents();
     }
 
+    @GetMapping("/{id}")
+    public ParentDTO findParent(@PathVariable String id) {
+        return parentService.find(Long.parseLong(id));
+    }
+
     @PostMapping("/save")
-    public Parent saveParent(@RequestBody Parent parent) {
-        return parentService.saveParent(parent);
+    public ParentDTO saveParent(@RequestBody ParentDTO parentDTO) {
+        return parentService.saveParent(parentDTO);
     }
 
     @PostMapping("/update")
-    public boolean updateParent(@RequestBody Parent parent) {
-        return parentService.updateParent(parent);
+    public boolean updateParent(@RequestBody ParentDTO parentDTO) {
+        return parentService.updateParent(parentDTO);
     }
 
     @PostMapping("/delete")
-    public boolean deleteParent(@RequestBody Parent parent) {
-        return parentService.deleteParent(parent);
+    public boolean deleteParent(@RequestBody ParentDTO parentDTO) {
+        return parentService.deleteParent(parentDTO);
     }
 }

@@ -1,6 +1,6 @@
 package by.itacademy.javaenterprise.lepnikau.web;
 
-import by.itacademy.javaenterprise.lepnikau.entity.Schedule;
+import by.itacademy.javaenterprise.lepnikau.dto.ScheduleDTO;
 import by.itacademy.javaenterprise.lepnikau.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,34 +8,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/schedule")
+@RequestMapping("/schedules")
 public class ScheduleController {
 
-    @Autowired
-    private ScheduleService scheduleService;
+    private final ScheduleService scheduleService;
 
-    @GetMapping("/find")
-    public Schedule findSchedule(@RequestBody String id) {
-        return scheduleService.findSchedule(Long.parseLong(id));
+    @Autowired
+    public ScheduleController(ScheduleService scheduleService) {
+        this.scheduleService = scheduleService;
     }
 
-    @GetMapping("/find/all")
-    public List<Schedule> getAllSchedule() {
+    @GetMapping
+    public List<ScheduleDTO> getAllSchedule() {
         return scheduleService.getAllSchedule();
     }
 
+    @GetMapping("/{id}")
+    public ScheduleDTO findSchedule(@PathVariable("id") String id) {
+        return scheduleService.findSchedule(Long.parseLong(id));
+    }
+
     @PostMapping("/save")
-    public Schedule saveSchedule(@RequestBody Schedule schedule) {
-        return scheduleService.saveSchedule(schedule);
+    public ScheduleDTO saveSchedule(@RequestBody ScheduleDTO scheduleDTO) {
+        return scheduleService.saveSchedule(scheduleDTO);
     }
 
     @PostMapping("/update")
-    public boolean updateSchedule(@RequestBody Schedule schedule) {
-        return scheduleService.updateSchedule(schedule);
+    public boolean updateSchedule(@RequestBody ScheduleDTO scheduleDTO) {
+        return scheduleService.updateSchedule(scheduleDTO);
     }
 
     @PostMapping("/delete")
-    public boolean deleteSchedule(@RequestBody Schedule schedule) {
-        return scheduleService.deleteSchedule(schedule);
+    public boolean deleteSchedule(@RequestBody ScheduleDTO scheduleDTO) {
+        return scheduleService.deleteSchedule(scheduleDTO);
     }
 }

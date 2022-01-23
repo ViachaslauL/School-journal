@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -44,7 +46,17 @@ public class ScheduleDAOImpl implements ScheduleDAO {
         if (id == null) throw new IllegalArgumentException();
 
         try {
-            return entityManager.find(Schedule.class, id);
+            TypedQuery<Schedule> query = entityManager.createQuery(
+                    "select s from Schedule s " +
+                            "left join fetch s.subject sb " +
+                            "left join fetch sb.teachers " +
+                            "left join fetch s.schoolClass sc " +
+                            "where s.scheduleId=:id",
+                    Schedule.class
+            );
+            query.setParameter("id", id);
+
+            return query.getSingleResult();
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -55,9 +67,18 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     @Override
     @Transactional
     public List<Schedule> getAll() {
-        return entityManager
-                .createQuery("select s from Schedule s", Schedule.class)
-                .getResultList();
+        try {
+            return entityManager.createQuery(
+                    "select s from Schedule s " +
+                            "left join fetch s.subject sb " +
+                            "left join fetch sb.teachers " +
+                            "left join fetch s.schoolClass sc",
+                    Schedule.class
+            ).getResultList();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return new ArrayList<>();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package by.itacademy.javaenterprise.lepnikau.web;
 
-import by.itacademy.javaenterprise.lepnikau.entity.SchoolClass;
+import by.itacademy.javaenterprise.lepnikau.dto.SchoolClassDTO;
 import by.itacademy.javaenterprise.lepnikau.service.SchoolClassesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/school_class")
+@RequestMapping("/classes")
 public class SchoolClassController {
 
     private static final Logger LOG = LoggerFactory.getLogger(SchoolClassController.class);
@@ -18,28 +18,33 @@ public class SchoolClassController {
     @Autowired
     private SchoolClassesService schoolClassesService;
 
-    @GetMapping("/find")
-    public SchoolClass findSchoolClass(@RequestBody String schoolClassId) {
-        return schoolClassesService.findSchoolClass(Long.parseLong(schoolClassId));
-    }
-
-    @GetMapping("/find/all")
-    public List<SchoolClass> findAllSchoolClasses() {
+    @GetMapping
+    public List<SchoolClassDTO> findAllSchoolClasses() {
         return schoolClassesService.findAllSchoolClasses();
     }
 
+    @GetMapping("/{id}")
+    public SchoolClassDTO findSchoolClass(@PathVariable String id) {
+        return schoolClassesService.findSchoolClass(Long.parseLong(id));
+    }
+
+    @GetMapping("/{id}/students")
+    public SchoolClassDTO findSchoolClassWithStudents(@PathVariable String id) {
+        return schoolClassesService.findSchoolClassWithStudents(Long.parseLong(id));
+    }
+
     @PostMapping("/save")
-    public SchoolClass saveSchoolClass(@RequestBody SchoolClass schoolClass) {
+    public SchoolClassDTO saveSchoolClass(@RequestBody SchoolClassDTO schoolClass) {
         return schoolClassesService.saveSchoolClass(schoolClass);
     }
 
     @PostMapping("/update")
-    public boolean updateSchoolClass(@RequestBody SchoolClass schoolClass) {
-        return schoolClassesService.updateSchoolClass(schoolClass);
+    public boolean updateSchoolClass(@RequestBody SchoolClassDTO schoolClassDTO) {
+        return schoolClassesService.updateSchoolClass(schoolClassDTO);
     }
 
     @PostMapping("/delete")
-    public boolean deleteSchoolClass(@RequestBody SchoolClass schoolClass) {
-        return schoolClassesService.deleteSchoolClass(schoolClass);
+    public boolean deleteSchoolClass(@RequestBody SchoolClassDTO schoolClassDTO) {
+        return schoolClassesService.deleteSchoolClass(schoolClassDTO);
     }
 }

@@ -1,21 +1,19 @@
 package by.itacademy.javaenterprise.lepnikau.entity;
 
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.jpa.QueryHints;
 
 import javax.persistence.*;
-import java.util.List;
-
-import static org.hibernate.jpa.QueryHints.HINT_PASS_DISTINCT_THROUGH;
+import java.util.Set;
 
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedEntityGraph(
+        name = "graph.studentsParents",
+        attributeNodes = @NamedAttributeNode("parents")
+)
 @Table(name = "students")
 public class Student {
 
@@ -36,10 +34,9 @@ public class Student {
     @Column(name = "class_id")
     private Long classId;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", insertable = false, updatable = false)
-    private List<Parent> parents;
+    private Set<Parent> parents;
 
     @AttributeOverrides({
             @AttributeOverride(name = "street", column = @Column(name = "street")),

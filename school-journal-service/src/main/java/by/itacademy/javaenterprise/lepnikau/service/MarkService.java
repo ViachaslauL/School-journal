@@ -1,35 +1,51 @@
 package by.itacademy.javaenterprise.lepnikau.service;
 
 import by.itacademy.javaenterprise.lepnikau.dao.MarkDAO;
+import by.itacademy.javaenterprise.lepnikau.dto.MarkDTO;
 import by.itacademy.javaenterprise.lepnikau.entity.Mark;
+import by.itacademy.javaenterprise.lepnikau.modelmapper.MarkMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class MarkService {
 
+    private final MarkDAO markDAO;
+    private final MarkMapper markMapper;
+
     @Autowired
-    private MarkDAO markDAO;
-
-    public Mark findMark(Long id) {
-        return markDAO.get(id);
+    public MarkService(MarkDAO markDAO, MarkMapper markMapper) {
+        this.markDAO = markDAO;
+        this.markMapper = markMapper;
     }
 
-    public List<Mark> getAllMarks() {
-        return markDAO.getAll();
+    public List<MarkDTO> findAllMarks() {
+        List<MarkDTO> markDTOList = new ArrayList<>();
+
+        for (Mark mark : markDAO.getAll()) {
+            markDTOList.add(markMapper.toDto(mark));
+        }
+
+        return markDTOList;
     }
 
-    public Mark saveMark(Mark mark) {
-        return markDAO.save(mark);
+    public MarkDTO findMark(Long id) {
+        return markMapper.toDto(markDAO.get(id));
     }
 
-    public boolean updateMark(Mark mark) {
-        return markDAO.update(mark);
+    public MarkDTO saveMark(MarkDTO markDTO) {
+        Mark savedMark = markDAO.save(markMapper.toEntity(markDTO));
+        return markMapper.toDto(savedMark);
     }
 
-    public boolean deleteMark(Mark mark) {
-        return markDAO.delete(mark);
+    public boolean updateMark(MarkDTO markDTO) {
+        return markDAO.update(markMapper.toEntity(markDTO));
+    }
+
+    public boolean deleteMark(MarkDTO markDTO) {
+        return markDAO.delete(markMapper.toEntity(markDTO));
     }
 }

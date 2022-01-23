@@ -4,7 +4,7 @@ create table schedules
     class_id    bigint       NOT NULL,
     subject_id  bigint       NOT NULL,
     task        varchar(255) NULL,
-    date        datetime     NOT NULL
+    date        datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 0
   DEFAULT CHARSET = utf8mb4;

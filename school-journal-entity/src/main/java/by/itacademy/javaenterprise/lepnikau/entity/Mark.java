@@ -36,6 +36,6 @@ public class Mark {
     @JoinColumn(name = "subject_id", insertable = false, updatable = false)
     private Subject subject;
 
-    @Column(name = "date", insertable = false)
+    @Column(name = "date")
     private Date date;
 }

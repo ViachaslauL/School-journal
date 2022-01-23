@@ -1,12 +1,9 @@
 package by.itacademy.javaenterprise.lepnikau.entity;
 
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -30,9 +27,5 @@ public class SchoolClass {
     @Formula(value = "concat(number, letter)")
     private String classCode;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SUBSELECT)
-    @JoinColumn(name = "class_id", referencedColumnName = "id", updatable = false)
-    private List<Student> students;
 }
 

@@ -22,27 +22,30 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
-    @GetMapping
-    public List<TeacherDTO> findAllTeachers() {
-        return teacherService.findAllTeachers();
+    @RequestMapping(method = RequestMethod.GET)
+    public List<TeacherDTO> findAllTeachers(
+            @RequestParam("pNumber") int pNumber,
+            @RequestParam("pSize") int pSize
+    ) {
+        return teacherService.findAllTeachers(pNumber, pSize);
     }
 
-    @GetMapping("/{id}")
-    public TeacherDTO findTeacher(@PathVariable String id) {
-        return teacherService.findTeacher(Long.parseLong(id));
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public TeacherDTO findTeacher(@PathVariable Long id) {
+        return teacherService.findTeacher(id);
     }
 
-    @PostMapping("/save")
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public TeacherDTO saveTeacher(@RequestBody TeacherDTO teacherDTO) {
        return teacherService.saveTeacher(teacherDTO);
     }
 
-    @PostMapping("/update")
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public boolean updateTeacher(@RequestBody TeacherDTO teacherDTO) {
         return teacherService.updateTeacher(teacherDTO);
     }
 
-    @PostMapping("/delete")
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public boolean deleteTeacher(@RequestBody TeacherDTO teacherDTO) {
         return teacherService.deleteTeacher(teacherDTO);
     }

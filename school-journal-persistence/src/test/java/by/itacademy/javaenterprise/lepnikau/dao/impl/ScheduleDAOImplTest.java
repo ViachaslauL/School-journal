@@ -104,7 +104,7 @@ class ScheduleDAOImplTest {
                 .find(Mockito.<Class<Schedule>>any(), Mockito.eq(schedule.getScheduleId()));
     }*/
 
-    @Test
+    /*@Test
     void getAll() {
 
         List<Schedule> schedules = new ArrayList<>();
@@ -116,7 +116,7 @@ class ScheduleDAOImplTest {
 
         assertEquals(schedules, scheduleDAO.getAll());
 
-    }
+    }*/
 
     @Test
     void updateTest() {

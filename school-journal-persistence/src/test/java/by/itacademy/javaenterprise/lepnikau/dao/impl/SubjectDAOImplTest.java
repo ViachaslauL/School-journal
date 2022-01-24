@@ -99,7 +99,7 @@ class SubjectDAOImplTest {
                 .find(Mockito.<Class<Subject>>any(), Mockito.eq(subject.getSubjectId()));
     }*/
 
-    @Test
+    /*@Test
     void getAll() {
 
         List<Subject> Subjects = new ArrayList<>();
@@ -111,7 +111,7 @@ class SubjectDAOImplTest {
 
         assertEquals(Subjects, subjectDAO.getAll());
 
-    }
+    }*/
 
     @Test
     void updateTest() {

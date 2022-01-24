@@ -22,10 +22,10 @@ public class ScheduleService {
         this.scheduleMapper = scheduleMapper;
     }
 
-    public List<ScheduleDTO> getAllSchedule() {
+    public List<ScheduleDTO> getAllSchedule(int pNumber, int pSize) {
         List<ScheduleDTO> scheduleDTOList = new ArrayList<>();
 
-        for (Schedule schedule : scheduleDAO.getAll()) {
+        for (Schedule schedule : scheduleDAO.getAll(pNumber, pSize)) {
             scheduleDTOList.add(scheduleMapper.toDto(schedule));
         }
 

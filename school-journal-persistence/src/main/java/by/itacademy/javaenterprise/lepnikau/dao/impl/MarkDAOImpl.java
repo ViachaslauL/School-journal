@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Transactional
 public class MarkDAOImpl implements MarkDAO {
 
     private static final Logger LOG = LoggerFactory.getLogger(MarkDAOImpl.class);
@@ -26,7 +27,6 @@ public class MarkDAOImpl implements MarkDAO {
     }
 
     @Override
-    @Transactional
     public Mark get(Long receivedId) {
         if (receivedId == null) throw new IllegalArgumentException();
 
@@ -48,18 +48,19 @@ public class MarkDAOImpl implements MarkDAO {
     }
 
     @Override
-    @Transactional
-    public List<Mark> getAll() {
+    public List<Mark> getAll(int pNumber, int pSize) {
         try {
-            return entityManager
-                    .createQuery(
-                            "select m from Mark m " +
-                                    "left join fetch m.student st " +
-                                    "left join fetch st.parents " +
-                                    "left join fetch m.subject sb " +
-                                    "left join fetch sb.teachers",
-                            Mark.class
-                    ).getResultList();
+            TypedQuery<Mark> query = entityManager.createQuery(
+                    "select m from Mark m " +
+                            "left join fetch m.student st " +
+                            "left join fetch st.parents " +
+                            "left join fetch m.subject sb " +
+                            "left join fetch sb.teachers",
+                    Mark.class);
+            query.setFirstResult((pNumber - 1) * pSize);
+            query.setMaxResults(pSize);
+
+            return query.getResultList();
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -67,7 +68,6 @@ public class MarkDAOImpl implements MarkDAO {
     }
 
     @Override
-    @Transactional
     public Mark save(Mark mark) {
         if (mark == null) throw new IllegalArgumentException();
 
@@ -81,7 +81,6 @@ public class MarkDAOImpl implements MarkDAO {
     }
 
     @Override
-    @Transactional
     public boolean update(Mark mark) {
         if (mark == null) throw new IllegalArgumentException();
 
@@ -96,7 +95,6 @@ public class MarkDAOImpl implements MarkDAO {
     }
 
     @Override
-    @Transactional
     public boolean delete(Mark mark) {
         if (mark == null) throw new IllegalArgumentException();
 

@@ -54,10 +54,10 @@ public class SchoolClassesService {
         return schoolClassDTO;
     }
 
-    public List<SchoolClassDTO> findAllSchoolClasses() {
+    public List<SchoolClassDTO> findAllSchoolClasses(int pNumber, int pSize) {
         List<SchoolClassDTO> classesDto = new ArrayList<>();
 
-        for (SchoolClass schoolClass : schoolClassDAO.getAll()) {
+        for (SchoolClass schoolClass : schoolClassDAO.getAll(pNumber, pSize)) {
             classesDto.add(schoolClassMapper.toDto(schoolClass));
         }
         return classesDto;

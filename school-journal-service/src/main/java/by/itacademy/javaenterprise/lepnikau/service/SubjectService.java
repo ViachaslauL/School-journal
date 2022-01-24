@@ -22,10 +22,10 @@ public class SubjectService {
         this.subjectMapper = subjectMapper;
     }
 
-    public List<SubjectDTO> findAllSubjects() {
+    public List<SubjectDTO> findAllSubjects(int pNumber, int pSize) {
         List<SubjectDTO> subjectDTOList = new ArrayList<>();
 
-        for (Subject subject : subjectDAO.getAll()) {
+        for (Subject subject : subjectDAO.getAll(pNumber, pSize)) {
             subjectDTOList.add(subjectMapper.toDto(subject));
         }
 

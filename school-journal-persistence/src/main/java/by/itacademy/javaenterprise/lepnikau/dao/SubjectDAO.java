@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface SubjectDAO extends DAO<Subject>{
 
-    List<Subject> getAll();
+    List<Subject> getAll(int pageNumber, int pageSize);
 
 }

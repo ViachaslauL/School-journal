@@ -14,6 +14,7 @@ import javax.persistence.TypedQuery;
 import java.util.*;
 
 @Repository
+@Transactional
 public class StudentDAOImpl implements StudentDAO {
 
     private static final Logger LOG = LoggerFactory.getLogger(StudentDAOImpl.class);
@@ -26,7 +27,6 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    @Transactional
     public Student save(Student student) {
         if (student == null) throw new IllegalArgumentException();
 
@@ -40,7 +40,6 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    @Transactional
     public Student get(Long id) {
         if (id == null) throw new IllegalArgumentException();
 
@@ -63,13 +62,15 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    @Transactional
-    public Set<Student> getAll() {
+    public Set<Student> getAll(int pNumber, int pSize) {
         try {
-            List<Student> resultList = entityManager
-                    .createQuery("select s from Student s left join fetch s.parents", Student.class)
-                    .getResultList();
-            return new LinkedHashSet<>(resultList);
+            TypedQuery<Student> query = entityManager
+                    .createQuery("select s from Student s left join fetch s.parents", Student.class);
+
+            query.setFirstResult((pNumber - 1) * pSize);
+            query.setMaxResults(pSize);
+
+            return new LinkedHashSet<>(query.getResultList());
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -77,7 +78,6 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    @Transactional
     public boolean update(Student student) {
         if (student == null) throw new IllegalArgumentException();
 
@@ -92,7 +92,6 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    @Transactional
     public boolean delete(Student student) {
         if (student == null) throw new IllegalArgumentException();
 
@@ -110,7 +109,6 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    @Transactional
     public Set<Student> getStudentsBySchoolClassId(Long schoolClassId) {
         if (schoolClassId == null) throw new IllegalArgumentException();
 

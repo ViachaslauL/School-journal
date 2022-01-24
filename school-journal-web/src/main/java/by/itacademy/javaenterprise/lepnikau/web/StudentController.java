@@ -5,7 +5,6 @@ import by.itacademy.javaenterprise.lepnikau.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -19,27 +18,30 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping
-    public Set<StudentDTO> findAllStudents() {
-        return studentService.findAllStudents();
+    @RequestMapping(method = RequestMethod.GET)
+    public Set<StudentDTO> findAllStudents(
+            @RequestParam("pNumber") int pNumber,
+            @RequestParam("pSize") int pSize
+    ) {
+        return studentService.findAllStudents(pNumber, pSize);
     }
 
-    @GetMapping("/{id}")
-    public StudentDTO findStudent(@PathVariable String id) {
-        return studentService.findStudent(Long.parseLong(id));
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public StudentDTO findStudent(@PathVariable Long id) {
+        return studentService.findStudent(id);
     }
 
-    @PostMapping("/save")
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public StudentDTO saveStudent(@RequestBody StudentDTO studentDTO) {
         return studentService.saveStudent(studentDTO);
     }
 
-    @PostMapping("/update")
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public boolean updateStudent(@RequestBody StudentDTO studentDTO) {
         return studentService.updateStudent(studentDTO);
     }
 
-    @PostMapping("/delete")
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public boolean deleteStudent(@RequestBody StudentDTO studentDTO) {
         return studentService.deleteStudent(studentDTO);
     }

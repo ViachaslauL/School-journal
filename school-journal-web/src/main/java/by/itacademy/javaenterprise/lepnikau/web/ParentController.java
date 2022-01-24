@@ -18,27 +18,30 @@ public class ParentController {
         this.parentService = parentService;
     }
 
-    @GetMapping
-    public List<ParentDTO> finaAllParents() {
-        return parentService.findAllParents();
+    @RequestMapping(method = RequestMethod.GET)
+    public List<ParentDTO> finaAllParents(
+            @RequestParam("pNumber") int pNumber,
+            @RequestParam("pSize") int pSize
+    ) {
+        return parentService.findAllParents(pNumber, pSize);
     }
 
-    @GetMapping("/{id}")
-    public ParentDTO findParent(@PathVariable String id) {
-        return parentService.find(Long.parseLong(id));
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ParentDTO findParent(@PathVariable Long id) {
+        return parentService.find(id);
     }
 
-    @PostMapping("/save")
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ParentDTO saveParent(@RequestBody ParentDTO parentDTO) {
         return parentService.saveParent(parentDTO);
     }
 
-    @PostMapping("/update")
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public boolean updateParent(@RequestBody ParentDTO parentDTO) {
         return parentService.updateParent(parentDTO);
     }
 
-    @PostMapping("/delete")
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public boolean deleteParent(@RequestBody ParentDTO parentDTO) {
         return parentService.deleteParent(parentDTO);
     }

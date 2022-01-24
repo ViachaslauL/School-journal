@@ -18,27 +18,30 @@ public class MarkController {
         this.markService = markService;
     }
 
-    @GetMapping
-    public List<MarkDTO> findAllMarks() {
-        return markService.findAllMarks();
+    @RequestMapping(method = RequestMethod.GET)
+    public List<MarkDTO> findAllMarks(
+            @RequestParam("pNumber") int pNumber,
+            @RequestParam("pSize") int pSize
+    ) {
+        return markService.findAllMarks(pNumber, pSize);
     }
 
-    @GetMapping("/{id}")
-    public MarkDTO findMark(@PathVariable String id) {
-        return markService.findMark(Long.parseLong(id));
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public MarkDTO findMark(@PathVariable Long id) {
+        return markService.findMark(id);
     }
 
-    @PostMapping("/save")
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public MarkDTO saveMark(@RequestBody MarkDTO markDTO) {
         return markService.saveMark(markDTO);
     }
 
-    @PostMapping("/update")
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public boolean updateMark(@RequestBody MarkDTO markDTO) {
         return markService.updateMark(markDTO);
     }
 
-    @PostMapping("/delete")
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public boolean deleteMark(@RequestBody MarkDTO markDTO) {
         return markService.deleteMark(markDTO);
     }

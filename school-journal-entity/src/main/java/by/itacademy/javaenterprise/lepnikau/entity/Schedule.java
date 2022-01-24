@@ -25,7 +25,7 @@ public class Schedule {
     private Long classId;
 
     @OneToOne
-    @JoinColumn(name = "class_id",insertable = false, updatable = false)
+    @JoinColumn(name = "class_id", insertable = false, updatable = false)
     private SchoolClass schoolClass;
 
     @Column(name = "subject_id")

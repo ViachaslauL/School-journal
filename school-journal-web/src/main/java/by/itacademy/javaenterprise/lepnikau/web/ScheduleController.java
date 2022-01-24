@@ -18,27 +18,30 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
 
-    @GetMapping
-    public List<ScheduleDTO> getAllSchedule() {
-        return scheduleService.getAllSchedule();
+    @RequestMapping(method = RequestMethod.GET)
+    public List<ScheduleDTO> getAllSchedule(
+            @RequestParam("pNumber") int pNumber,
+            @RequestParam("pSize") int pSize
+    ) {
+        return scheduleService.getAllSchedule(pNumber, pSize);
     }
 
-    @GetMapping("/{id}")
-    public ScheduleDTO findSchedule(@PathVariable("id") String id) {
-        return scheduleService.findSchedule(Long.parseLong(id));
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ScheduleDTO findSchedule(@PathVariable Long id) {
+        return scheduleService.findSchedule(id);
     }
 
-    @PostMapping("/save")
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ScheduleDTO saveSchedule(@RequestBody ScheduleDTO scheduleDTO) {
         return scheduleService.saveSchedule(scheduleDTO);
     }
 
-    @PostMapping("/update")
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public boolean updateSchedule(@RequestBody ScheduleDTO scheduleDTO) {
         return scheduleService.updateSchedule(scheduleDTO);
     }
 
-    @PostMapping("/delete")
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public boolean deleteSchedule(@RequestBody ScheduleDTO scheduleDTO) {
         return scheduleService.deleteSchedule(scheduleDTO);
     }

@@ -9,9 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Transactional
 public class TeacherDAOImpl implements TeacherDAO {
 
     private static final Logger LOG = LoggerFactory.getLogger(TeacherDAOImpl.class);
@@ -24,7 +27,6 @@ public class TeacherDAOImpl implements TeacherDAO {
     }
 
     @Override
-    @Transactional
     public Teacher get(Long id) {
         if (id == null) throw new IllegalArgumentException();
 
@@ -38,15 +40,22 @@ public class TeacherDAOImpl implements TeacherDAO {
     }
 
     @Override
-    @Transactional
-    public List<Teacher> getAll() {
-        return entityManager
-                .createQuery("select t from Teacher t", Teacher.class)
-                .getResultList();
+    public List<Teacher> getAll(int pNumber, int pSize) {
+        try {
+            TypedQuery<Teacher> query =
+                    entityManager.createQuery("select t from Teacher t", Teacher.class);
+
+            query.setFirstResult((pNumber - 1) * pSize);
+            query.setMaxResults(pSize);
+
+            return query.getResultList();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return new ArrayList<>();
     }
 
     @Override
-    @Transactional
     public Teacher save(Teacher teacher) {
         if (teacher == null) throw new IllegalArgumentException();
 
@@ -61,7 +70,6 @@ public class TeacherDAOImpl implements TeacherDAO {
     }
 
     @Override
-    @Transactional
     public boolean update(Teacher teacher) {
         if (teacher == null) throw new IllegalArgumentException();
 
@@ -76,7 +84,6 @@ public class TeacherDAOImpl implements TeacherDAO {
     }
 
     @Override
-    @Transactional
     public boolean delete(Teacher teacher) {
         if (teacher == null) throw new IllegalArgumentException();
 

@@ -9,9 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Transactional
 public class ParentDAOImpl implements ParentDAO {
 
     private static final Logger LOG = LoggerFactory.getLogger(ParentDAOImpl.class);
@@ -24,7 +27,6 @@ public class ParentDAOImpl implements ParentDAO {
     }
 
     @Override
-    @Transactional
     public Parent save(Parent parent) {
         if (parent == null) throw new IllegalArgumentException();
 
@@ -38,7 +40,6 @@ public class ParentDAOImpl implements ParentDAO {
     }
 
     @Override
-    @Transactional
     public Parent get(Long id) {
         if (id == null) throw new IllegalArgumentException();
 
@@ -51,15 +52,22 @@ public class ParentDAOImpl implements ParentDAO {
     }
 
     @Override
-    @Transactional
-    public List<Parent> getAll() {
-        return entityManager
-                .createQuery("select p from Parent p", Parent.class)
-                .getResultList();
+    public List<Parent> getAll(int pNumber, int pSize) {
+        try {
+            TypedQuery<Parent> query = entityManager
+                    .createQuery("select p from Parent p", Parent.class);
+
+            query.setFirstResult((pNumber - 1) * pSize);
+            query.setMaxResults(pSize);
+
+            return query.getResultList();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return new ArrayList<>();
     }
 
     @Override
-    @Transactional
     public boolean update(Parent parent) {
         if (parent == null) throw new IllegalArgumentException();
 
@@ -74,7 +82,6 @@ public class ParentDAOImpl implements ParentDAO {
     }
 
     @Override
-    @Transactional
     public boolean delete(Parent parent) {
         if (parent == null) throw new IllegalArgumentException();
 

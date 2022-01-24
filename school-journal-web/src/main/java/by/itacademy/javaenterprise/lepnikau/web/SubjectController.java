@@ -22,29 +22,31 @@ public class SubjectController {
         this.subjectService = subjectService;
     }
 
-    @GetMapping
-    public List<SubjectDTO> findAllSubjects() {
-        return subjectService.findAllSubjects();
+    @RequestMapping(method = RequestMethod.GET)
+    public List<SubjectDTO> findAllSubjects(
+            @RequestParam("pNumber") int pNumber,
+            @RequestParam("pSize") int pSize
+    ) {
+        return subjectService.findAllSubjects(pNumber, pSize);
     }
 
-    @GetMapping("/{id}")
-    public SubjectDTO findSubject(@PathVariable String id) {
-        return subjectService.findSubject(Long.parseLong(id));
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public SubjectDTO findSubject(@PathVariable Long id) {
+        return subjectService.findSubject(id);
     }
 
-    @PostMapping("/save")
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public SubjectDTO saveSubject(@RequestBody SubjectDTO subjectDTO) {
         return subjectService.saveSubject(subjectDTO);
     }
 
-    @PostMapping("/update")
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public boolean updateSubject(@RequestBody SubjectDTO subjectDTO) {
         return subjectService.updateSubject(subjectDTO);
     }
 
-    @PostMapping("/delete")
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public boolean deleteSubject(@RequestBody SubjectDTO subjectDTO) {
         return subjectService.deleteSubject(subjectDTO);
     }
-
 }

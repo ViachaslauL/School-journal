@@ -22,10 +22,10 @@ public class ParentService {
         this.parentMapper = parentMapper;
     }
 
-    public List<ParentDTO> findAllParents() {
+    public List<ParentDTO> findAllParents(int pNumber, int pSize) {
         List<ParentDTO> parentDTOList = new ArrayList<>();
 
-        for (Parent parent : parentDAO.getAll()) {
+        for (Parent parent : parentDAO.getAll(pNumber, pSize)) {
             parentDTOList.add(parentMapper.toDto(parent));
         }
 

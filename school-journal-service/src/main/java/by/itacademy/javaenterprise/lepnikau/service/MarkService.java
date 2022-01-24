@@ -22,10 +22,10 @@ public class MarkService {
         this.markMapper = markMapper;
     }
 
-    public List<MarkDTO> findAllMarks() {
+    public List<MarkDTO> findAllMarks(int pNumber, int pSize) {
         List<MarkDTO> markDTOList = new ArrayList<>();
 
-        for (Mark mark : markDAO.getAll()) {
+        for (Mark mark : markDAO.getAll(pNumber, pSize)) {
             markDTOList.add(markMapper.toDto(mark));
         }
 

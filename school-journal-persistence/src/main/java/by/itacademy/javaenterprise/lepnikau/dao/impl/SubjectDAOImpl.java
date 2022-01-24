@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Transactional
 public class SubjectDAOImpl implements SubjectDAO {
 
     private static final Logger LOG = LoggerFactory.getLogger(SubjectDAOImpl.class);
@@ -26,21 +27,22 @@ public class SubjectDAOImpl implements SubjectDAO {
     }
 
     @Override
-    @Transactional
-    public Subject save(Subject subject) {
-        if (subject == null) throw new IllegalArgumentException();
-
+    public List<Subject> getAll(int pNumber, int pSize) {
         try {
-            entityManager.persist(subject);
-            return subject;
+            TypedQuery<Subject> query = entityManager.createQuery(
+                    "select s from Subject s left join fetch s.teachers", Subject.class);
+
+            query.setFirstResult((pNumber - 1) * pSize);
+            query.setMaxResults(pSize);
+
+            return query.getResultList();
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
-    @Transactional
     public Subject get(Long id) {
         if (id == null) throw new IllegalArgumentException();
 
@@ -60,20 +62,19 @@ public class SubjectDAOImpl implements SubjectDAO {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Subject> getAll() {
+    public Subject save(Subject subject) {
+        if (subject == null) throw new IllegalArgumentException();
+
         try {
-            return entityManager
-                    .createQuery("select s from Subject s left join fetch s.teachers", Subject.class)
-                    .getResultList();
+            entityManager.persist(subject);
+            return subject;
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return new ArrayList<>();
+        return null;
     }
 
     @Override
-    @Transactional
     public boolean update(Subject subject) {
         if (subject == null) throw new IllegalArgumentException();
 
@@ -88,7 +89,6 @@ public class SubjectDAOImpl implements SubjectDAO {
     }
 
     @Override
-    @Transactional
     public boolean delete(Subject subject) {
         if (subject == null) throw new IllegalArgumentException();
 

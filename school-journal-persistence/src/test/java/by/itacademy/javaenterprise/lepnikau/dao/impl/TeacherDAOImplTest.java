@@ -103,7 +103,7 @@ class TeacherDAOImplTest {
                 .find(Mockito.<Class<Teacher>>any(), Mockito.eq(teacher.getId()));
     }
 
-    @Test
+    /*@Test
     void getAll() {
 
         List<Teacher> teachers = new ArrayList<>();
@@ -115,7 +115,7 @@ class TeacherDAOImplTest {
 
         assertEquals(teachers, teacherDAO.getAll());
 
-    }
+    }*/
 
     @Test
     void updateTest() {

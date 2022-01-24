@@ -33,10 +33,10 @@ public class StudentService {
         return studentMapper.toDto(studentDAO.get(id));
     }
 
-    public Set<StudentDTO> findAllStudents() {
+    public Set<StudentDTO> findAllStudents(int pNumber, int pSize) {
         LinkedHashSet<StudentDTO> studentsDTO = new LinkedHashSet<>();
 
-        for (Student student : studentDAO.getAll()) {
+        for (Student student : studentDAO.getAll(pNumber, pSize)) {
             studentsDTO.add(studentMapper.toDto(student));
         }
 

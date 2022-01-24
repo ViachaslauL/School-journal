@@ -27,10 +27,10 @@ public class TeacherService {
         this.teacherMapper = teacherMapper;
     }
 
-    public List<TeacherDTO> findAllTeachers() {
+    public List<TeacherDTO> findAllTeachers(int pNumber, int pSize) {
         List<TeacherDTO> teacherDTOList = new ArrayList<>();
 
-        for (Teacher teacher : teacherDAO.getAll()) {
+        for (Teacher teacher : teacherDAO.getAll(pNumber, pSize)) {
             teacherDTOList.add(teacherMapper.toDto(teacher));
         }
 

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Transactional
 public class ScheduleDAOImpl implements ScheduleDAO {
 
     private static final Logger LOG = LoggerFactory.getLogger(ScheduleDAOImpl.class);
@@ -26,22 +27,6 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     }
 
     @Override
-    @Transactional
-    public Schedule save(Schedule schedule) {
-        if (schedule == null) throw new IllegalArgumentException();
-
-        try {
-            entityManager.persist(schedule);
-            return schedule;
-        } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        }
-
-        return null;
-    }
-
-    @Override
-    @Transactional
     public Schedule get(Long id) {
         if (id == null) throw new IllegalArgumentException();
 
@@ -65,16 +50,18 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     }
 
     @Override
-    @Transactional
-    public List<Schedule> getAll() {
+    public List<Schedule> getAll(int pNumber, int pSize) {
         try {
-            return entityManager.createQuery(
+            TypedQuery<Schedule> query = entityManager.createQuery(
                     "select s from Schedule s " +
                             "left join fetch s.subject sb " +
                             "left join fetch sb.teachers " +
                             "left join fetch s.schoolClass sc",
-                    Schedule.class
-            ).getResultList();
+                    Schedule.class);
+            query.setFirstResult((pNumber - 1) * pSize);
+            query.setMaxResults(pSize);
+
+            return query.getResultList();
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -82,7 +69,19 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     }
 
     @Override
-    @Transactional
+    public Schedule save(Schedule schedule) {
+        if (schedule == null) throw new IllegalArgumentException();
+
+        try {
+            entityManager.persist(schedule);
+            return schedule;
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return null;
+    }
+
+    @Override
     public boolean update(Schedule schedule) {
         if (schedule == null) throw new IllegalArgumentException();
 
@@ -97,7 +96,6 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     }
 
     @Override
-    @Transactional
     public boolean delete(Schedule schedule) {
         if (schedule == null) throw new IllegalArgumentException();
 

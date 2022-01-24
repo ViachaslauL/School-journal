@@ -9,11 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Transactional
 public class SchoolClassDAOImpl implements SchoolClassDAO {
 
     private static final Logger LOG = LoggerFactory.getLogger(SchoolClassDAOImpl.class);
@@ -26,7 +27,6 @@ public class SchoolClassDAOImpl implements SchoolClassDAO {
     }
 
     @Override
-    @Transactional
     public SchoolClass save(SchoolClass schoolClass) {
         if (schoolClass == null) throw new IllegalArgumentException();
 
@@ -40,7 +40,6 @@ public class SchoolClassDAOImpl implements SchoolClassDAO {
     }
 
     @Override
-    @Transactional
     public SchoolClass get(Long id) {
         if (id == null) throw new IllegalArgumentException();
 
@@ -60,15 +59,21 @@ public class SchoolClassDAOImpl implements SchoolClassDAO {
     }
 
     @Override
-    @Transactional
-    public List<SchoolClass> getAll() {
-        return entityManager
-                .createQuery("select s from SchoolClass s", SchoolClass.class)
-                .getResultList();
+    public List<SchoolClass> getAll(int pNumber, int pSize) {
+        try {
+            TypedQuery<SchoolClass> query =
+                    entityManager.createQuery("select s from SchoolClass s", SchoolClass.class);
+            query.setFirstResult((pNumber - 1) * pSize);
+            query.setMaxResults(pSize);
+
+            return query.getResultList();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return new ArrayList<>();
     }
 
     @Override
-    @Transactional
     public boolean update(SchoolClass schoolClass) {
         if (schoolClass == null) throw new IllegalArgumentException();
 
@@ -83,7 +88,6 @@ public class SchoolClassDAOImpl implements SchoolClassDAO {
     }
 
     @Override
-    @Transactional
     public boolean delete(SchoolClass schoolClass) {
         if (schoolClass == null) throw new IllegalArgumentException();
 

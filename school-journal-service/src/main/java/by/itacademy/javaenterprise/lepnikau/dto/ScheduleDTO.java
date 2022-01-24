@@ -2,6 +2,7 @@ package by.itacademy.javaenterprise.lepnikau.dto;
 
 import by.itacademy.javaenterprise.lepnikau.entity.SchoolClass;
 import by.itacademy.javaenterprise.lepnikau.entity.Subject;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ScheduleDTO {
 
     private Long scheduleId;

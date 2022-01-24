@@ -17,4 +17,5 @@ public class SpringWebConfig implements WebMvcConfigurer {
     public ViewResolver urlBasedViewResolver() {
         return new InternalResourceViewResolver("/WEB-INF/pages/", ".jsp");
     }
+
 }

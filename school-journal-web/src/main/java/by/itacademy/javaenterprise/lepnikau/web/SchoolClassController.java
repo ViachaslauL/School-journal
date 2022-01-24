@@ -15,35 +15,42 @@ public class SchoolClassController {
 
     private static final Logger LOG = LoggerFactory.getLogger(SchoolClassController.class);
 
+    private final SchoolClassesService schoolClassesService;
+
     @Autowired
-    private SchoolClassesService schoolClassesService;
-
-    @GetMapping
-    public List<SchoolClassDTO> findAllSchoolClasses() {
-        return schoolClassesService.findAllSchoolClasses();
+    public SchoolClassController(SchoolClassesService schoolClassesService) {
+        this.schoolClassesService = schoolClassesService;
     }
 
-    @GetMapping("/{id}")
-    public SchoolClassDTO findSchoolClass(@PathVariable String id) {
-        return schoolClassesService.findSchoolClass(Long.parseLong(id));
+    @RequestMapping(method = RequestMethod.GET)
+    public List<SchoolClassDTO> findAllSchoolClasses(
+            @RequestParam("pNumber") int pNumber,
+            @RequestParam("pSize") int pSize
+    ) {
+        return schoolClassesService.findAllSchoolClasses(pNumber, pSize);
     }
 
-    @GetMapping("/{id}/students")
-    public SchoolClassDTO findSchoolClassWithStudents(@PathVariable String id) {
-        return schoolClassesService.findSchoolClassWithStudents(Long.parseLong(id));
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public SchoolClassDTO findSchoolClass(@PathVariable Long id) {
+        return schoolClassesService.findSchoolClass(id);
     }
 
-    @PostMapping("/save")
+    @RequestMapping(value = "/{id}/students", method = RequestMethod.GET)
+    public SchoolClassDTO findSchoolClassWithStudents(@PathVariable Long id) {
+        return schoolClassesService.findSchoolClassWithStudents(id);
+    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public SchoolClassDTO saveSchoolClass(@RequestBody SchoolClassDTO schoolClass) {
         return schoolClassesService.saveSchoolClass(schoolClass);
     }
 
-    @PostMapping("/update")
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public boolean updateSchoolClass(@RequestBody SchoolClassDTO schoolClassDTO) {
         return schoolClassesService.updateSchoolClass(schoolClassDTO);
     }
 
-    @PostMapping("/delete")
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public boolean deleteSchoolClass(@RequestBody SchoolClassDTO schoolClassDTO) {
         return schoolClassesService.deleteSchoolClass(schoolClassDTO);
     }

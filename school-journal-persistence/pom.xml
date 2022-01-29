@@ -7,7 +7,7 @@
     <parent>
         <groupId>by.itacademy.javaenterprise.lepnikau</groupId>
         <artifactId>school-journal</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <name>school-journal-persistence</name>
@@ -24,36 +24,7 @@
         <dependency>
             <groupId>by.itacademy.javaenterprise.lepnikau</groupId>
             <artifactId>school-journal-entity</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-dbcp2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <scope>test</scope>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

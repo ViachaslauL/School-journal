@@ -7,7 +7,7 @@
     <parent>
         <groupId>by.itacademy.javaenterprise.lepnikau</groupId>
         <artifactId>school-journal</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <name>school-journal-entity</name>
@@ -21,28 +21,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.32</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </dependency>
 
     </dependencies>
 </project>

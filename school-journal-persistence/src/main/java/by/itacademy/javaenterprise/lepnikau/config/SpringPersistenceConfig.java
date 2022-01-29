@@ -22,8 +22,12 @@ import java.util.Properties;
 @ComponentScan(basePackages = "by.itacademy.javaenterprise.lepnikau.dao")
 public class SpringPersistenceConfig {
 
+    private final Environment environment;
+
     @Autowired
-    private Environment environment;
+    public SpringPersistenceConfig(Environment environment) {
+        this.environment = environment;
+    }
 
     @Bean
     public BasicDataSource dataSource() {

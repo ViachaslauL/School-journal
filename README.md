@@ -4,7 +4,6 @@
 <h4>Task list</h4>
 <ol>
 <li> git repo and best practices
-<li> base on #20
 <li> add DAO and hibernate tiers with spring integration
 <li> all configurations in Java code (don't use xml)
 <li> deploy to servlet container per student
@@ -17,7 +16,7 @@
 <li>docker-compose
 <li>Flyway
 <li>Hibernate
-<li>Slf4j+logback
+<li>Slf4j+log4j
 <li>Lombok
 </ol>
 <h4>How to run</h4>

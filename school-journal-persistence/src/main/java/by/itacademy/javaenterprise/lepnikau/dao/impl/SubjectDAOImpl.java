@@ -11,7 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Repository
 @Transactional
@@ -27,7 +28,7 @@ public class SubjectDAOImpl implements SubjectDAO {
     }
 
     @Override
-    public List<Subject> getAll(int pNumber, int pSize) {
+    public Set<Subject> getAll(int pNumber, int pSize) {
         try {
             TypedQuery<Subject> query = entityManager.createQuery(
                     "select s from Subject s left join fetch s.teachers", Subject.class);
@@ -35,11 +36,11 @@ public class SubjectDAOImpl implements SubjectDAO {
             query.setFirstResult((pNumber - 1) * pSize);
             query.setMaxResults(pSize);
 
-            return query.getResultList();
+            return new LinkedHashSet<>(query.getResultList());
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return new ArrayList<>();
+        return new LinkedHashSet<>();
     }
 
     @Override

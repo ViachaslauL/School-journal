@@ -1,11 +1,9 @@
 package by.itacademy.javaenterprise.lepnikau.entity;
 
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -25,5 +23,5 @@ public class Subject {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id", referencedColumnName = "subject_id")
-    private List<Teacher> teachers;
+    private Set<Teacher> teachers;
 }

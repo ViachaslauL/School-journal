@@ -1,4 +1,4 @@
-package by.itacademy.javaenterprise.lepnikau.pojo;
+package by.itacademy.javaenterprise.lepnikau.dto.security;
 
 public class MessageResponse {
 

@@ -11,10 +11,10 @@ import by.itacademy.javaenterprise.lepnikau.dao.UserRepository;
 import by.itacademy.javaenterprise.lepnikau.entity.ERole;
 import by.itacademy.javaenterprise.lepnikau.entity.Role;
 import by.itacademy.javaenterprise.lepnikau.entity.User;
-import by.itacademy.javaenterprise.lepnikau.pojo.JwtResponse;
-import by.itacademy.javaenterprise.lepnikau.pojo.LoginRequest;
-import by.itacademy.javaenterprise.lepnikau.pojo.MessageResponse;
-import by.itacademy.javaenterprise.lepnikau.pojo.SignUpRequest;
+import by.itacademy.javaenterprise.lepnikau.dto.security.JwtResponse;
+import by.itacademy.javaenterprise.lepnikau.dto.security.LoginRequest;
+import by.itacademy.javaenterprise.lepnikau.dto.security.MessageResponse;
+import by.itacademy.javaenterprise.lepnikau.dto.security.SignUpRequest;
 import by.itacademy.javaenterprise.lepnikau.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -88,7 +88,8 @@ public class AuthController {
                     .body(new MessageResponse("Error: Email is exist"));
         }
 
-        User user = new User(signupRequest.getUsername(),
+        User user = new User(
+                signupRequest.getUsername(),
                 signupRequest.getEmail(),
                 passwordEncoder.encode(signupRequest.getPassword()));
 
@@ -117,7 +118,6 @@ public class AuthController {
                         roles.add(modRole);
 
                         break;
-
                     default:
                         Role userRole = roleRepository
                                 .findByName(ERole.ROLE_USER)

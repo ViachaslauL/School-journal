@@ -2,10 +2,10 @@ package by.itacademy.javaenterprise.lepnikau.dao;
 
 import by.itacademy.javaenterprise.lepnikau.entity.Subject;
 
-import java.util.List;
+import java.util.Set;
 
 public interface SubjectDAO extends DAO<Subject>{
 
-    List<Subject> getAll(int pageNumber, int pageSize);
+    Set<Subject> getAll(int pageNumber, int pageSize);
 
 }

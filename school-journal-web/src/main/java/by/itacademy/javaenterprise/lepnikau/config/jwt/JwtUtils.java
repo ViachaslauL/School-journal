@@ -6,16 +6,17 @@ import by.itacademy.javaenterprise.lepnikau.service.UserDetailsImpl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 
 @Component
 public class JwtUtils {
-
-    private final String jwtSecret = "MegaLargeSigningSecretKeyForDemoApplicationMegaLargeSigningSecretKeyForDemoApplication";
-
-    private final int jwtExpirationMs = 86400000;
+    @Value("${app.jwtSecret}")
+    private String jwtSecret;
+    @Value("${app.jwtExpirationMs}")
+    private int jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {
 

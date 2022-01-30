@@ -2,6 +2,7 @@ package by.itacademy.javaenterprise.lepnikau.dto;
 
 import by.itacademy.javaenterprise.lepnikau.entity.Student;
 import by.itacademy.javaenterprise.lepnikau.entity.Subject;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +29,6 @@ public class MarkDTO {
     private Long subjectId;
 
     private Subject subject;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd:HH-mm")
     private Date date;
 }

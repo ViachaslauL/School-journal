@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class SubjectService {
@@ -22,8 +24,8 @@ public class SubjectService {
         this.subjectMapper = subjectMapper;
     }
 
-    public List<SubjectDTO> findAllSubjects(int pNumber, int pSize) {
-        List<SubjectDTO> subjectDTOList = new ArrayList<>();
+    public Set<SubjectDTO> findAllSubjects(int pNumber, int pSize) {
+        LinkedHashSet<SubjectDTO> subjectDTOList = new LinkedHashSet<>();
 
         for (Subject subject : subjectDAO.getAll(pNumber, pSize)) {
             subjectDTOList.add(subjectMapper.toDto(subject));

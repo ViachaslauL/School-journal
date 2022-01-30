@@ -3,6 +3,7 @@ package by.itacademy.javaenterprise.lepnikau.web;
 import by.itacademy.javaenterprise.lepnikau.dto.ParentDTO;
 import by.itacademy.javaenterprise.lepnikau.service.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class ParentController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public List<ParentDTO> finaAllParents(
             @RequestParam("pNumber") int pNumber,
             @RequestParam("pSize") int pSize
@@ -27,21 +29,25 @@ public class ParentController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public ParentDTO findParent(@PathVariable Long id) {
         return parentService.find(id);
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public ParentDTO saveParent(@RequestBody ParentDTO parentDTO) {
         return parentService.saveParent(parentDTO);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @RequestMapping(value = "/", method = RequestMethod.PUT)
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public boolean updateParent(@RequestBody ParentDTO parentDTO) {
         return parentService.updateParent(parentDTO);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/", method = RequestMethod.DELETE)
+    @PreAuthorize("hasRole('ADMIN')")
     public boolean deleteParent(@RequestBody ParentDTO parentDTO) {
         return parentService.deleteParent(parentDTO);
     }

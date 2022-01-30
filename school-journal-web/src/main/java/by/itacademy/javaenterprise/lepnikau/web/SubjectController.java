@@ -2,18 +2,16 @@ package by.itacademy.javaenterprise.lepnikau.web;
 
 import by.itacademy.javaenterprise.lepnikau.dto.SubjectDTO;
 import by.itacademy.javaenterprise.lepnikau.service.SubjectService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/subjects")
 public class SubjectController {
-
-    private static final Logger LOG = LoggerFactory.getLogger(SubjectController.class);
 
     private final SubjectService subjectService;
 
@@ -23,7 +21,8 @@ public class SubjectController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<SubjectDTO> findAllSubjects(
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    public Set<SubjectDTO> findAllSubjects(
             @RequestParam("pNumber") int pNumber,
             @RequestParam("pSize") int pSize
     ) {
@@ -31,21 +30,25 @@ public class SubjectController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public SubjectDTO findSubject(@PathVariable Long id) {
         return subjectService.findSubject(id);
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public SubjectDTO saveSubject(@RequestBody SubjectDTO subjectDTO) {
         return subjectService.saveSubject(subjectDTO);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @RequestMapping(value = "/", method = RequestMethod.PUT)
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public boolean updateSubject(@RequestBody SubjectDTO subjectDTO) {
         return subjectService.updateSubject(subjectDTO);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/", method = RequestMethod.DELETE)
+    @PreAuthorize("hasRole('ADMIN')")
     public boolean deleteSubject(@RequestBody SubjectDTO subjectDTO) {
         return subjectService.deleteSubject(subjectDTO);
     }

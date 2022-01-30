@@ -128,13 +128,13 @@
                             <location>classpath:db/migrate</location>
                         </locations>
                     </configuration>
-                    <dependencies>
+                    <!--<dependencies>
                         <dependency>
                             <groupId>mysql</groupId>
                             <artifactId>mysql-connector-java</artifactId>
                             <version>8.0.27</version>
                         </dependency>
-                    </dependencies>
+                    </dependencies>-->
                 </plugin>
             </plugins>
         </pluginManagement>

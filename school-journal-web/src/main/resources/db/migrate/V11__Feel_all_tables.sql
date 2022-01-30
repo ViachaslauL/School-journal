@@ -97,3 +97,7 @@ INSERT INTO `marks` (`student_id`, `mark`, `subject_id`, `date`) VALUES
 ('9', '6', '2', '2021-10-09'),
 ('10', '9', '1', '2021-10-10'),
 ('10', '8', '1', '2021-10-11');
+
+INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');

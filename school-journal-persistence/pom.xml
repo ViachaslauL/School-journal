@@ -8,6 +8,7 @@
         <groupId>by.itacademy.javaenterprise.lepnikau</groupId>
         <artifactId>school-journal</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <name>school-journal-persistence</name>

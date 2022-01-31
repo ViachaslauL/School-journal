@@ -1,24 +1,20 @@
 <h2>School journal</h2>
 <h4>Description</h4>
 <p>This app acts as a school journal. Allows you to enter data in the form of marks, students, subjects, teachers, and student parents.</p>
-<h4>Task list</h4>
-<ol>
-<li> git repo and best practices
-<li> base on #20
-<li> add DAO and hibernate tiers with spring integration
-<li> all configurations in Java code (don't use xml)
-<li> deploy to servlet container per student
-</ol>
 <h4>Technologies</h4>
 <ol>
 <li>Java version: 11
-<li>MySQL database
+<li>Maven
+<li>Spring Boot v2.6.3
+<li>Spring Security (JSON Web Token)
+<li>Jetty-9.4.44
 <li>commons-dbcp2 pool
-<li>docker-compose
+<li>MySQL database 8.0.27
 <li>Flyway
-<li>Hibernate
-<li>Slf4j+logback
+<li>docker-compose
+<li>Slf4j+log4j
 <li>Lombok
+<li>Jackson
 </ol>
 <h4>How to run</h4>
 <p>In order to build and run the application, follow these steps. 

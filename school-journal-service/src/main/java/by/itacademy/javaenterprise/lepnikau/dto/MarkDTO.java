@@ -9,6 +9,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.Date;
 
 @Data
@@ -25,6 +29,8 @@ public class MarkDTO {
 
     private StudentDTO student;
 
+    @Max(10)
+    @Min(2)
     private int mark;
     @JsonProperty("subjectId")
     private Long subjectId;

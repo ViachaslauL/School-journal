@@ -1,6 +1,8 @@
 package by.itacademy.javaenterprise.lepnikau.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(value = {"subjectId"}, allowSetters = true)
 public class TeacherDTO {
 
     private Long id;
@@ -20,7 +23,7 @@ public class TeacherDTO {
     private String firstName;
 
     private String patronymic;
-
+    @JsonProperty("subjectId")
     private Long subjectId;
 
 }

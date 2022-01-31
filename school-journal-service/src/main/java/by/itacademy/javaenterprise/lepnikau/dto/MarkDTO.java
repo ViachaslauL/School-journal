@@ -1,9 +1,9 @@
 package by.itacademy.javaenterprise.lepnikau.dto;
 
-import by.itacademy.javaenterprise.lepnikau.entity.Student;
-import by.itacademy.javaenterprise.lepnikau.entity.Subject;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,19 +16,20 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(value = {"studentId", "subjectId"}, allowSetters = true)
 public class MarkDTO {
 
     private Long id;
-
+    @JsonProperty("studentId")
     private Long studentId;
 
-    private Student student;
+    private StudentDTO student;
 
     private int mark;
-
+    @JsonProperty("subjectId")
     private Long subjectId;
 
-    private Subject subject;
+    private SubjectDTO subject;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd:HH-mm")
     private Date date;
 }

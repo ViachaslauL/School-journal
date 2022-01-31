@@ -2,7 +2,6 @@ package by.itacademy.javaenterprise.lepnikau.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -17,7 +16,6 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableConfigurationProperties
 @ComponentScan(basePackages = "by.itacademy.javaenterprise.lepnikau.dao")
 public class SpringPersistenceConfig {
 
@@ -81,7 +79,7 @@ public class SpringPersistenceConfig {
         properties.put("spring.jooq.sql-dialect",
                 environment.getRequiredProperty("spring.jooq.sql-dialect"));
 
-        properties.put("hibernate.show_sql",
+        properties.put("spring.jpa.show-sql",
                 environment.getRequiredProperty("spring.jpa.show-sql"));
 
         properties.put("spring.jpa.properties.hibernate.format_sql",

@@ -76,11 +76,11 @@ public class SpringPersistenceConfig {
 
     private Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.put("spring.jooq.sql-dialect",
-                environment.getRequiredProperty("spring.jooq.sql-dialect"));
+        properties.put("logging.level.org.hibernate.SQL",
+                environment.getRequiredProperty("logging.level.org.hibernate.SQL"));
 
-        properties.put("spring.jpa.show-sql",
-                environment.getRequiredProperty("spring.jpa.show-sql"));
+        properties.put("logging.level.org.hibernate.type.descriptor.sql.BasicBinder",
+                environment.getRequiredProperty("logging.level.org.hibernate.type.descriptor.sql.BasicBinder"));
 
         properties.put("spring.jpa.properties.hibernate.format_sql",
                 environment.getRequiredProperty("spring.jpa.properties.hibernate.format_sql"));

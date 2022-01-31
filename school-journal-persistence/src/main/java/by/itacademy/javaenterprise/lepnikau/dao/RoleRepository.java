@@ -1,6 +1,6 @@
 package by.itacademy.javaenterprise.lepnikau.dao;
 
-import by.itacademy.javaenterprise.lepnikau.entity.ERole;
+import by.itacademy.javaenterprise.lepnikau.entity.enums.ERole;
 import by.itacademy.javaenterprise.lepnikau.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

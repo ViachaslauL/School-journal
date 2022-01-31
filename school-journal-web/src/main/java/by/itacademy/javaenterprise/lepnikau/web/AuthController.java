@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import by.itacademy.javaenterprise.lepnikau.config.jwt.JwtUtils;
 import by.itacademy.javaenterprise.lepnikau.dao.RoleRepository;
 import by.itacademy.javaenterprise.lepnikau.dao.UserRepository;
-import by.itacademy.javaenterprise.lepnikau.entity.ERole;
+import by.itacademy.javaenterprise.lepnikau.entity.enums.ERole;
 import by.itacademy.javaenterprise.lepnikau.entity.Role;
 import by.itacademy.javaenterprise.lepnikau.entity.User;
 import by.itacademy.javaenterprise.lepnikau.dto.security.JwtResponse;

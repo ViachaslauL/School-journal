@@ -1,5 +1,7 @@
 package by.itacademy.javaenterprise.lepnikau.entity;
 
+import by.itacademy.javaenterprise.lepnikau.entity.enums.ERole;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

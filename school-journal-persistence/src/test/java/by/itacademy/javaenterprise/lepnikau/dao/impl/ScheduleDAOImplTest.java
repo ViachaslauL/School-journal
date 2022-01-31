@@ -65,29 +65,18 @@ class ScheduleDAOImplTest {
 
     }
 
-    /*@Test
+    @Test
     void getTest() {
 
-        when(entityManager.find(Mockito.<Class<Schedule>>any(), Mockito.eq(schedule.getScheduleId())))
-                .thenReturn(schedule);
+        when(entityManager.createQuery(anyString(), Mockito.<Class<Schedule>>any()))
+                .thenReturn(typedQuery);
+
+        when(typedQuery.getSingleResult()).thenReturn(schedule);
 
         assertEquals(schedule, scheduleDAO.get(schedule.getScheduleId()));
 
         verify(entityManager, times(1))
-                .find(Mockito.<Class<Schedule>>any(), Mockito.eq(schedule.getScheduleId()));
-    }
-
-    @Test
-    void getTestWithWrongId() {
-        schedule.setScheduleId(-1L);
-
-        when(entityManager.find(Mockito.<Class<Schedule>>any(), Mockito.eq(schedule.getScheduleId())))
-                .thenReturn(null);
-
-        assertNull(scheduleDAO.get(schedule.getScheduleId()));
-
-        verify(entityManager, times(1))
-                .find(Mockito.<Class<Schedule>>any(), Mockito.eq(schedule.getScheduleId()));
+                .createQuery(anyString(), Mockito.<Class<Schedule>>any());
     }
 
     @Test
@@ -102,9 +91,9 @@ class ScheduleDAOImplTest {
 
         verify(entityManager, times(1))
                 .find(Mockito.<Class<Schedule>>any(), Mockito.eq(schedule.getScheduleId()));
-    }*/
+    }
 
-    /*@Test
+    @Test
     void getAll() {
 
         List<Schedule> schedules = new ArrayList<>();
@@ -114,9 +103,9 @@ class ScheduleDAOImplTest {
 
         when(typedQuery.getResultList()).thenReturn(schedules);
 
-        assertEquals(schedules, scheduleDAO.getAll());
+        assertEquals(schedules, scheduleDAO.getAll(1, 1));
 
-    }*/
+    }
 
     @Test
     void updateTest() {

@@ -62,46 +62,7 @@ class StudentDAOImplTest {
 
     }
 
-    /*@Test
-    void getTest() {
-
-        when(entityManager.find(Mockito.<Class<Student>>any(), Mockito.eq(student.getId())))
-                .thenReturn(student);
-
-        assertEquals(student, studentDAO.get(student.getId()));
-
-        verify(entityManager, times(1))
-                .find(Mockito.<Class<Student>>any(), Mockito.eq(student.getId()));
-    }
-
     @Test
-    void getTestWithWrongId() {
-        student.setId(-1L);
-
-        when(entityManager.find(Mockito.<Class<Student>>any(), Mockito.eq(student.getId())))
-                .thenReturn(null);
-
-        assertNull(studentDAO.get(student.getId()));
-
-        verify(entityManager, times(1))
-                .find(Mockito.<Class<Student>>any(), Mockito.eq(student.getId()));
-    }
-
-    @Test
-    void getTestWithEntityIdIsNull() {
-        student.setId(null);
-
-        when(entityManager.find(Mockito.<Class<Student>>any(), Mockito.eq(student.getId())))
-                .thenThrow(IllegalArgumentException.class);
-
-        assertThrows(IllegalArgumentException.class,
-                () -> entityManager.find(Mockito.<Class<Student>>any(), Mockito.eq(student.getId())));
-
-        verify(entityManager, times(1))
-                .find(Mockito.<Class<Student>>any(), Mockito.eq(student.getId()));
-    }*/
-
-    /*@Test
     void getAll() {
 
         List<Student> students = new ArrayList<>();
@@ -111,9 +72,9 @@ class StudentDAOImplTest {
 
         when(typedQuery.getResultList()).thenReturn(students);
 
-        assertEquals(new LinkedHashSet<>(students), studentDAO.getAll());
+        assertEquals(new LinkedHashSet<>(students), studentDAO.getAll(1, 1));
 
-    }*/
+    }
 
     @Test
     void updateTest() {

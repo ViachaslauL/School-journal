@@ -69,30 +69,17 @@ class MarkDAOImplTest {
 
     }
 
-    /*@Test
+    @Test
     void getTest() {
 
-        when(entityManager.find(Mockito.<Class<Mark>>any(), Mockito.eq(mark.getId())))
-                .thenReturn(mark);
+        Mark mark = new Mark();
 
-        assertEquals(mark, markDAO.get(mark.getId()));
+        when(entityManager.createQuery(anyString(), Mockito.<Class<Mark>>any()))
+                .thenReturn(typedQuery);
 
-        verify(entityManager, times(1))
-                .find(Mockito.<Class<Mark>>any(), Mockito.eq(mark.getId()));
+        when(typedQuery.getSingleResult()).thenReturn(mark);
 
-    }
-
-    @Test
-    void getTestWithWrongId() {
-        mark.setId(-1L);
-
-        when(entityManager.find(Mockito.<Class<Mark>>any(), Mockito.eq(mark.getId())))
-                .thenReturn(null);
-
-        assertNull(markDAO.get(mark.getId()));
-
-        verify(entityManager, times(1))
-                .find(Mockito.<Class<Mark>>any(), Mockito.eq(mark.getId()));
+        assertEquals(mark, markDAO.get(1L));
 
     }
 
@@ -108,9 +95,9 @@ class MarkDAOImplTest {
 
         verify(entityManager, times(1))
                 .find(Mockito.<Class<Mark>>any(), Mockito.eq(mark.getId()));
-    }*/
+    }
 
-    /*@Test
+    @Test
     void getAll() {
 
         List<Mark> marks = new ArrayList<>();
@@ -120,9 +107,9 @@ class MarkDAOImplTest {
 
         when(typedQuery.getResultList()).thenReturn(marks);
 
-        assertEquals(marks, markDAO.getAll());
+        assertEquals(marks, markDAO.getAll(1, 1));
 
-    }*/
+    }
 
     @Test
     void updateTest() {

@@ -101,7 +101,7 @@ class ParentDAOImplTest {
                 .find(Mockito.<Class<Parent>>any(), Mockito.eq(parent.getId()));
     }
 
-    /*@Test
+    @Test
     void getAll() {
 
         List<Parent> parents = new ArrayList<>();
@@ -111,9 +111,9 @@ class ParentDAOImplTest {
 
         when(typedQuery.getResultList()).thenReturn(parents);
 
-        assertEquals(parents, parentDAO.getAll());
+        assertEquals(parents, parentDAO.getAll(1,1));
 
-    }*/
+    }
 
     @Test
     void updateTest() {

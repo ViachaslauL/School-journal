@@ -11,7 +11,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -60,58 +62,33 @@ class SubjectDAOImplTest {
 
     }
 
-    /*@Test
+    @Test
     void getTest() {
-
-        when(entityManager.find(Mockito.<Class<Subject>>any(), Mockito.eq(subject.getSubjectId())))
-                .thenReturn(subject);
-
-        assertEquals(subject, subjectDAO.get(subject.getSubjectId()));
-
-        verify(entityManager, times(1))
-                .find(Mockito.<Class<Subject>>any(), Mockito.eq(subject.getSubjectId()));
-    }
-
-    @Test
-    void getTestWithWrongId() {
-        subject.setSubjectId(-1L);
-
-        when(entityManager.find(Mockito.<Class<Subject>>any(), Mockito.eq(subject.getSubjectId())))
-                .thenReturn(null);
-
-        assertNull(subjectDAO.get(subject.getSubjectId()));
-
-        verify(entityManager, times(1))
-                .find(Mockito.<Class<Subject>>any(), Mockito.eq(subject.getSubjectId()));
-    }
-
-    @Test
-    void getTestWithEntityIdIsNull() {
-        subject.setSubjectId(null);
-
-        when(entityManager.find(Mockito.<Class<Subject>>any(), Mockito.eq(subject.getSubjectId())))
-                .thenThrow(IllegalArgumentException.class);
-
-        assertThrows(IllegalArgumentException.class,
-                () -> entityManager.find(Mockito.<Class<Subject>>any(), Mockito.eq(subject.getSubjectId())));
-
-        verify(entityManager, times(1))
-                .find(Mockito.<Class<Subject>>any(), Mockito.eq(subject.getSubjectId()));
-    }*/
-
-    /*@Test
-    void getAll() {
-
-        List<Subject> Subjects = new ArrayList<>();
 
         when(entityManager.createQuery(anyString(), Mockito.<Class<Subject>>any()))
                 .thenReturn(typedQuery);
 
-        when(typedQuery.getResultList()).thenReturn(Subjects);
+        when((typedQuery.getSingleResult())).thenReturn(subject);
 
-        assertEquals(Subjects, subjectDAO.getAll());
+        assertEquals(subject, subjectDAO.get(subject.getSubjectId()));
 
-    }*/
+        verify(entityManager, times(1))
+                .createQuery(anyString(), Mockito.<Class<Subject>>any());
+    }
+
+    @Test
+    void getAll() {
+
+        Set<Subject> Subjects = new LinkedHashSet<>();
+
+        when(entityManager.createQuery(anyString(), Mockito.<Class<Subject>>any()))
+                .thenReturn(typedQuery);
+
+        when(typedQuery.getResultList()).thenReturn(new ArrayList<>(Subjects));
+
+        assertEquals(Subjects, subjectDAO.getAll(1, 1));
+
+    }
 
     @Test
     void updateTest() {

@@ -61,46 +61,21 @@ class SchoolClassDAOImplTest {
 
     }
 
-    /*@Test
+    @Test
     void getTest() {
 
-        when(entityManager.find(Mockito.<Class<SchoolClass>>any(), Mockito.eq(schoolClass.getId())))
-                .thenReturn(schoolClass);
+        when(entityManager.createQuery(anyString(), Mockito.<Class<SchoolClass>>any()))
+                .thenReturn(typedQuery);
+
+        when(typedQuery.getSingleResult()).thenReturn(schoolClass);
 
         assertEquals(schoolClass, schoolClassDAO.get(schoolClass.getId()));
 
         verify(entityManager, times(1))
-                .find(Mockito.<Class<SchoolClass>>any(), Mockito.eq(schoolClass.getId()));
+                .createQuery(anyString(), Mockito.<Class<SchoolClass>>any());
     }
 
     @Test
-    void getTestWithWrongId() {
-        schoolClass.setId(-1L);
-
-        when(entityManager.find(Mockito.<Class<SchoolClass>>any(), Mockito.eq(schoolClass.getId())))
-                .thenReturn(null);
-
-        assertNull(schoolClassDAO.get(schoolClass.getId()));
-
-        verify(entityManager, times(1))
-                .find(Mockito.<Class<SchoolClass>>any(), Mockito.eq(schoolClass.getId()));
-    }
-
-    @Test
-    void getTestWithEntityIdIsNull() {
-        schoolClass.setId(null);
-
-        when(entityManager.find(Mockito.<Class<SchoolClass>>any(), Mockito.eq(schoolClass.getId())))
-                .thenThrow(IllegalArgumentException.class);
-
-        assertThrows(IllegalArgumentException.class,
-                () -> entityManager.find(Mockito.<Class<SchoolClass>>any(), Mockito.eq(schoolClass.getId())));
-
-        verify(entityManager, times(1))
-                .find(Mockito.<Class<SchoolClass>>any(), Mockito.eq(schoolClass.getId()));
-    }*/
-
-    /*@Test
     void getAll() {
 
         List<SchoolClass> schoolClasses = new ArrayList<>();
@@ -110,9 +85,9 @@ class SchoolClassDAOImplTest {
 
         when(typedQuery.getResultList()).thenReturn(schoolClasses);
 
-        assertEquals(schoolClasses, schoolClassDAO.getAll());
+        assertEquals(schoolClasses, schoolClassDAO.getAll(1, 1));
 
-    }*/
+    }
 
     @Test
     void updateTest() {

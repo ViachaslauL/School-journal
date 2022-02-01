@@ -11,16 +11,36 @@
 				{
 					"name": "localhost:8080/classes",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzY0ODIwNCwiZXhwIjoxNjQzNzM0NjA0fQ.Xf22Ck4YPcPuSjOPU7THFdO_bizkpJM6BmeoQQ4GpClbe3_pLjrwKd_YdgJXj8_sitIePBStpO9cQRzAq4fg_w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/classes",
+							"raw": "localhost:8080/classes?pNumber=2&pSize=5",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"classes"
+							],
+							"query": [
+								{
+									"key": "pNumber",
+									"value": "2"
+								},
+								{
+									"key": "pSize",
+									"value": "5"
+								}
 							]
 						}
 					},
@@ -32,6 +52,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzY0ODIwNCwiZXhwIjoxNjQzNzM0NjA0fQ.Xf22Ck4YPcPuSjOPU7THFdO_bizkpJM6BmeoQQ4GpClbe3_pLjrwKd_YdgJXj8_sitIePBStpO9cQRzAq4fg_w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -39,14 +69,14 @@
 							"raw": "1"
 						},
 						"url": {
-							"raw": "localhost:8080/classes/2",
+							"raw": "localhost:8080/classes/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"classes",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -55,6 +85,16 @@
 				{
 					"name": "localhost:8080/classes/{id}/students",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU1ODExMSwiZXhwIjoxNjQzNjQ0NTExfQ.UXRw-Ros2Zu44c6tV-f1eq7V__WwX3M0hh6Bf-I-cz119pJtzQaKVVMhD8lIDBtnNoSsQbCOP9CjUWw1QrRM4g",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -79,8 +119,18 @@
 					"response": []
 				},
 				{
-					"name": "localhost:8080/classes/save",
+					"name": "localhost:8080/classes/",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU0MjMyMSwiZXhwIjoxNjQzNjI4NzIxfQ.XHtmh9JZCFZHfOtHGPb2grR1WiEpx38rs6stDr5fVAZJPUMQ_tAJueUbXHDul-HWA-_ml9_cF0OCukdbuk7KeQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -94,23 +144,23 @@
 							"raw": "{\r\n    \"number\":7,\r\n    \"letter\":\"E\"\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/classes/save",
+							"raw": "localhost:8080/classes/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"classes",
-								"save"
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/classes/update",
+					"name": "localhost:8080/classes/",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -120,26 +170,26 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":5,\r\n    \"number\":7,\r\n    \"letter\":\"E\"\r\n}"
+							"raw": "{\r\n    \"id\":5,\r\n    \"number\":7,\r\n    \"letter\":\"A\"\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/classes/update",
+							"raw": "localhost:8080/classes/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"classes",
-								"update"
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/classes/delete",
+					"name": "localhost:8080/classes/",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -152,14 +202,14 @@
 							"raw": "{\r\n    \"id\":10,\r\n    \"number\":10,\r\n    \"letter\":\"D\"\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/classes/delete",
+							"raw": "localhost:8080/classes/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"classes",
-								"delete"
+								""
 							]
 						}
 					},
@@ -176,6 +226,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU1MDk0MSwiZXhwIjoxNjQzNjM3MzQxfQ.JQC2TFeVY7WbNJ4ZEkXTM9gzvL0OIHV7V5s1S639pBLKaDllJWixSYmhQzMc4IifB4sjtMmuS-4ytpdfrBEYoA",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -188,13 +248,23 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/subjects",
+							"raw": "localhost:8080/subjects?pNumber=1&pSize=5",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"subjects"
+							],
+							"query": [
+								{
+									"key": "pNumber",
+									"value": "1"
+								},
+								{
+									"key": "pSize",
+									"value": "5"
+								}
 							]
 						}
 					},
@@ -206,6 +276,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU1Nzc2MywiZXhwIjoxNjQzNjQ0MTYzfQ.63KUzZ-ppdzapLn_RfGlPMOSbYgC3yahwuYfgvZWNC43EXekWfe9Me2UQEOI6q6gJoQrR7OR3mBzSO67N6CDWw",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -213,22 +293,32 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/subjects/2",
+							"raw": "localhost:8080/subjects/10",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"subjects",
-								"2"
+								"10"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/subjects/save",
+					"name": "localhost:8080/subjects/",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU0MjMyMSwiZXhwIjoxNjQzNjI4NzIxfQ.XHtmh9JZCFZHfOtHGPb2grR1WiEpx38rs6stDr5fVAZJPUMQ_tAJueUbXHDul-HWA-_ml9_cF0OCukdbuk7KeQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -242,23 +332,23 @@
 							"raw": "{\r\n    \"subjectName\":\"Some\",\r\n    \"teachers\":[]\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/subjects/save",
+							"raw": "localhost:8080/subjects/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"subjects",
-								"save"
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/subjects/update",
+					"name": "localhost:8080/subjects/",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -268,26 +358,26 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"subjectId\":11, \"subjectName\":\"Some subject\"}"
+							"raw": "{\r\n    \"subjectId\":11, \r\n    \"subjectName\":\"Some subject\"\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/subjects/update",
+							"raw": "localhost:8080/subjects/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"subjects",
-								"update"
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/subjects/delete",
+					"name": "localhost:8080/subjects/",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -297,17 +387,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"subjectId\":11,\"subjectName\":\"Some another subject\"}"
+							"raw": "{\r\n    \"subjectId\":17,\r\n    \"subjectName\":\"Some another subject\"\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/subjects/delete",
+							"raw": "localhost:8080/subjects/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"subjects",
-								"delete"
+								""
 							]
 						}
 					},
@@ -324,13 +414,23 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/teachers",
+							"raw": "localhost:8080/teachers?pNumber=2&pSize=5",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"teachers"
+							],
+							"query": [
+								{
+									"key": "pNumber",
+									"value": "2"
+								},
+								{
+									"key": "pSize",
+									"value": "5"
+								}
 							]
 						}
 					},
@@ -363,8 +463,18 @@
 					"response": []
 				},
 				{
-					"name": "localhost:8080/teachers/save",
+					"name": "localhost:8080/teachers/",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU0MjMyMSwiZXhwIjoxNjQzNjI4NzIxfQ.XHtmh9JZCFZHfOtHGPb2grR1WiEpx38rs6stDr5fVAZJPUMQ_tAJueUbXHDul-HWA-_ml9_cF0OCukdbuk7KeQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -378,23 +488,23 @@
 							"raw": "{\r\n    \"lastName\":\"Lepnikau\",\r\n    \"firstName\":\"Viachaslau\",\r\n    \"patronymic\":\"Viktorovich\",\r\n    \"subjectId\":1\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/teachers/save",
+							"raw": "localhost:8080/teachers/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"teachers",
-								"save"
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/teachers/update",
+					"name": "localhost:8080/teachers/",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -407,23 +517,23 @@
 							"raw": "{\r\n    \"id\":10,\r\n    \"lastName\":\"Лепников\",\r\n    \"firstName\":\"Вячеслав\",\r\n    \"patronymic\":\"Викторович\",\r\n    \"subjectId\":5\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/teachers/update",
+							"raw": "localhost:8080/teachers/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"teachers",
-								"update"
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/teachers/delete",
+					"name": "localhost:8080/teachers/",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -436,14 +546,14 @@
 							"raw": "{\r\n    \"id\":10,\r\n    \"lastName\":\"Лепников\",\r\n    \"firstName\":\"Вячеслав\",\r\n    \"patronymic\":\"Викторович\",\r\n    \"subjectId\":2\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/teachers/delete",
+							"raw": "localhost:8080/teachers/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"teachers",
-								"delete"
+								""
 							]
 						}
 					},
@@ -457,16 +567,36 @@
 				{
 					"name": "localhost:8080/students",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzYyMjgxNiwiZXhwIjoxNjQzNzA5MjE2fQ.YCF857EoU9aQwj2VK_tP5d6L1MFwGLbXjAteIf3Y6ztkRzPdsg6DFBcM5d9SkFekpTAyjPiHAhoO3zSH4EBaSw",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/students",
+							"raw": "localhost:8080/students?pNumber=1&pSize=5",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"students"
+							],
+							"query": [
+								{
+									"key": "pNumber",
+									"value": "1"
+								},
+								{
+									"key": "pSize",
+									"value": "5"
+								}
 							]
 						}
 					},
@@ -479,6 +609,16 @@
 						"disabledSystemHeaders": {}
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU1ODY1MCwiZXhwIjoxNjQzNjQ1MDUwfQ.i23kB0FSWEHtT1-Zj_1ururx634EvyGvPzrFabl4kdfcoa_yoNdkag2phN7lWEII_Nzn-VoqGyWCJN1eGQOrNQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -497,22 +637,32 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/students/1",
+							"raw": "localhost:8080/students/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"students",
-								"1"
+								"2"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/students/save",
+					"name": "localhost:8080/students/",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU0MjMyMSwiZXhwIjoxNjQzNjI4NzIxfQ.XHtmh9JZCFZHfOtHGPb2grR1WiEpx38rs6stDr5fVAZJPUMQ_tAJueUbXHDul-HWA-_ml9_cF0OCukdbuk7KeQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -526,23 +676,23 @@
 							"raw": "{\r\n    \"lastName\": \"Лепников\",\r\n    \"firstName\": \"Вячеслав\",\r\n    \"patronymic\": \"Викторович\",\r\n    \"classId\": 5,\r\n    \r\n    \"address\": {\r\n        \"street\": \"Leschinskogo\",\r\n        \"houseNumber\": 5,\r\n        \"flatNumber\": 63\r\n    }\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/students/save",
+							"raw": "localhost:8080/students/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"students",
-								"save"
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/students/update",
+					"name": "localhost:8080/students/",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -552,26 +702,26 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":11,\r\n    \"lastName\":\"Лепников\",\r\n    \"firstName\":\"Вячеслав\",\r\n    \"patronymic\":\"Викторович\",\r\n    \"classId\":6,\r\n    \"parents\":[\r\n        {\r\n            \"lastName\":\"ParentOneFirstName\",\r\n            \"firstName\":\"ParentOneFirstName\",\r\n            \"patronymic\":\"ParentOneFirstName\"\r\n        }\r\n    ],\r\n    \"address\":{\r\n        \"street\":\"Лещинского\",\r\n        \"houseNumber\":5,\r\n        \"flatNumber\":63\r\n    }\r\n}"
+							"raw": "{\r\n    \"id\":15,\r\n    \"lastName\":\"Лепников\",\r\n    \"firstName\":\"Вячеслав\",\r\n    \"patronymic\":\"Викторович\",\r\n    \"classId\":6,\r\n    \"parents\":[\r\n        {\r\n            \"lastName\":\"ParentOneFirstName\",\r\n            \"firstName\":\"ParentOneFirstName\",\r\n            \"patronymic\":\"ParentOneFirstName\"\r\n        }\r\n    ],\r\n    \"address\":{\r\n        \"street\":\"Лещинского\",\r\n        \"houseNumber\":5,\r\n        \"flatNumber\":63\r\n    }\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/students/update",
+							"raw": "localhost:8080/students/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"students",
-								"update"
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/student/delete",
+					"name": "localhost:8080/student/",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -581,17 +731,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":13,\r\n    \"lastName\":\"Лепников\",\r\n    \"firstName\":\"Вячеслав\",\r\n    \"patronymic\":\"Викторович\",\r\n    \"classId\":6,\r\n    \"address\":{\r\n        \"street\":\"Лещинского\",\r\n        \"houseNumber\":5,\r\n        \"flatNumber\":63\r\n    }\r\n}"
+							"raw": "{\r\n    \"id\":10,\r\n    \"lastName\":\"Лепников\",\r\n    \"firstName\":\"Вячеслав\",\r\n    \"patronymic\":\"Викторович\",\r\n    \"classId\":6,\r\n    \"parents\": [\r\n        {\r\n            \"id\": 2,\r\n            \"lastName\": \"Баранова\",\r\n            \"firstName\": \"Ксения\",\r\n            \"patronymic\": \"Александровна\",\r\n            \"studentId\": 2\r\n        }\r\n    ],\r\n    \"address\":{\r\n        \"street\":\"Лещинского\",\r\n        \"houseNumber\":5,\r\n        \"flatNumber\":63\r\n    }\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/students/delete",
+							"raw": "localhost:8080/students/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"students",
-								"delete"
+								""
 							]
 						}
 					},
@@ -608,6 +758,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzYyMzI3NCwiZXhwIjoxNjQzNzA5Njc0fQ.qeScKUaqvMVOnUNu-77Au1LlptNyps3o3MJqQOx1wHMGDbwbbx0Y6d27XhPysKVSOi3FC33Ok1JpCaoGMkxxNQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -615,13 +775,23 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/parents",
+							"raw": "localhost:8080/parents?pNumber=1&pSize=5",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"parents"
+							],
+							"query": [
+								{
+									"key": "pNumber",
+									"value": "1"
+								},
+								{
+									"key": "pSize",
+									"value": "5"
+								}
 							]
 						}
 					},
@@ -647,8 +817,18 @@
 					"response": []
 				},
 				{
-					"name": "localhost:8080/parents/save",
+					"name": "localhost:8080/parents/",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU0MjMyMSwiZXhwIjoxNjQzNjI4NzIxfQ.XHtmh9JZCFZHfOtHGPb2grR1WiEpx38rs6stDr5fVAZJPUMQ_tAJueUbXHDul-HWA-_ml9_cF0OCukdbuk7KeQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -662,23 +842,23 @@
 							"raw": "{\r\n    \"lastName\":\"Куликов\",\r\n    \"firstName\":\"Александр\",\r\n    \"patronymic\":\"Иванович\",\r\n    \"studentId\":1\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/parents/save",
+							"raw": "localhost:8080/parents/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"parents",
-								"save"
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/parents/update",
+					"name": "localhost:8080/parents/",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -691,23 +871,23 @@
 							"raw": "{\r\n    \"id\":13,\r\n    \"lastName\":\"Куликов\",\r\n    \"firstName\":\"Александр\",\r\n    \"patronymic\":\"Васильевичxxxx\",\r\n    \"studentId\":1\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/parents/update",
+							"raw": "localhost:8080/parents/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"parents",
-								"update"
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/parents/delete",
+					"name": "localhost:8080/parents/",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -717,17 +897,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":13,\r\n    \"lastName\":\"Куликов\",\r\n    \"firstName\":\"Александр\",\r\n    \"patronymic\":\"Иванович\",\r\n    \"studentId\":10\r\n}"
+							"raw": "{\r\n    \"id\":12,\r\n    \"lastName\":\"Куликов\",\r\n    \"firstName\":\"Александр\",\r\n    \"patronymic\":\"Иванович\",\r\n    \"studentId\":10\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/parents/delete",
+							"raw": "localhost:8080/parents/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"parents",
-								"delete"
+								""
 							]
 						}
 					},
@@ -739,54 +919,92 @@
 			"name": "mark",
 			"item": [
 				{
-					"name": "localhost:8080/mark/find",
+					"name": "localhost:8080/marks",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU1NzE1NiwiZXhwIjoxNjQzNjQzNTU2fQ.jN8QMdk71GxZ5pxA8IBZr5EM3K7dSp3pE4tWCQqt-X84OUmkHAPHH8DV_rE6CSJdplCwAkXkyfaEaQpctFB8_w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "11"
+							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/mark/find",
+							"raw": "localhost:8080/marks?pNumber=1&pSize=5",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"mark",
-								"find"
+								"marks"
+							],
+							"query": [
+								{
+									"key": "pNumber",
+									"value": "1"
+								},
+								{
+									"key": "pSize",
+									"value": "5"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/mark/find/all",
+					"name": "localhost:8080/marks/{id}",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU1ODY1MCwiZXhwIjoxNjQzNjQ1MDUwfQ.i23kB0FSWEHtT1-Zj_1ururx634EvyGvPzrFabl4kdfcoa_yoNdkag2phN7lWEII_Nzn-VoqGyWCJN1eGQOrNQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/mark/find/all",
+							"raw": "localhost:8080/marks/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"mark",
-								"find",
-								"all"
+								"marks",
+								"2"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/mark/save",
+					"name": "localhost:8080/marks/",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU0MjMyMSwiZXhwIjoxNjQzNjI4NzIxfQ.XHtmh9JZCFZHfOtHGPb2grR1WiEpx38rs6stDr5fVAZJPUMQ_tAJueUbXHDul-HWA-_ml9_cF0OCukdbuk7KeQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -797,26 +1015,26 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"studentId\":6,\r\n    \"mark\":9,\r\n    \"subjectId\":2\r\n}"
+							"raw": "{\r\n    \"studentId\":6,\r\n    \"mark\":9,\r\n    \"subjectId\":2,\r\n    \"date\":1633039600000\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/mark/save",
+							"raw": "localhost:8080/marks/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"mark",
-								"save"
+								"marks",
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/mark/update",
+					"name": "localhost:8080/marks/",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -826,26 +1044,26 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":20,\r\n    \"studentId\":8,\r\n    \"mark\":7,\r\n    \"subjectId\":2\r\n}"
+							"raw": "{\r\n    \"id\":20,\r\n    \"studentId\":8,\r\n    \"mark\":7,\r\n    \"subjectId\":2,\r\n    \"date\":1642919187000\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/mark/update",
+							"raw": "localhost:8080/marks/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"mark",
-								"update"
+								"marks",
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/mark/delete",
+					"name": "localhost:8080/marks/",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -855,17 +1073,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":20,\r\n    \"studentId\":8,\r\n    \"mark\":7,\r\n    \"subjectId\":2\r\n}"
+							"raw": "{\r\n    \"id\":21,\r\n    \"studentId\":8,\r\n    \"mark\":7,\r\n    \"subjectId\":2\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/mark/delete",
+							"raw": "localhost:8080/marks/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"mark",
-								"delete"
+								"marks",
+								""
 							]
 						}
 					},
@@ -877,37 +1095,21 @@
 			"name": "schedule",
 			"item": [
 				{
-					"name": "localhost:8080/schedule/find",
+					"name": "localhost:8080/schedules",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "1"
-						},
-						"url": {
-							"raw": "localhost:8080/schedule/find",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"schedule",
-								"find"
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU1ODExMSwiZXhwIjoxNjQzNjQ0NTExfQ.UXRw-Ros2Zu44c6tV-f1eq7V__WwX3M0hh6Bf-I-cz119pJtzQaKVVMhD8lIDBtnNoSsQbCOP9CjUWw1QrRM4g",
+									"type": "string"
+								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "localhost:8080/schedule/find/all",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -915,23 +1117,83 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/schedule/find/all",
+							"raw": "localhost:8080/schedules?pNumber=1&pSize=5",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"schedule",
-								"find",
-								"all"
+								"schedules"
+							],
+							"query": [
+								{
+									"key": "pNumber",
+									"value": "1"
+								},
+								{
+									"key": "pSize",
+									"value": "5"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/schedule/save",
+					"name": "localhost:8080/schedules/{id}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU1Nzc2MywiZXhwIjoxNjQzNjQ0MTYzfQ.63KUzZ-ppdzapLn_RfGlPMOSbYgC3yahwuYfgvZWNC43EXekWfe9Me2UQEOI6q6gJoQrR7OR3mBzSO67N6CDWw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/schedules/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"schedules",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/schedules/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzU1NzYyMSwiZXhwIjoxNjQzNjQ0MDIxfQ.7cDCIV5xYPK5CI067_eH3UTfZBIbvkfAiRsWGYScST6jfnLeMnGPvQavS4W9cfIQlAG4ZN26E9L0XVx6ANv6ew",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -942,26 +1204,26 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"classId\":5,\r\n    \"subjectId\":3,\r\n    \"task\":\"Another task for another subject\"\r\n}"
+							"raw": "{\r\n    \"classId\":2,\r\n    \"subjectId\":3,\r\n    \"task\":\"Another task for another subject\",\r\n    \"date\":\"2022-01-30:15-00\"\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/schedule/save",
+							"raw": "localhost:8080/schedules/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"schedule",
-								"save"
+								"schedules",
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "localhost:8080/schedule/update",
+					"name": "localhost:8080/schedules/update",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -971,16 +1233,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"scheduleId\":1,\r\n    \"classId\":8,\r\n    \"subjectId\":7,\r\n    \"task\":\"Updated shedule\"\r\n}"
+							"raw": "{\r\n    \"scheduleId\":3,\r\n    \"classId\":4,\r\n    \"subjectId\":1,\r\n    \"task\":\"Updated shedule\",\r\n    \"date\":1633135600000\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/schedule/update",
+							"raw": "localhost:8080/schedules/update",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"schedule",
+								"schedules",
 								"update"
 							]
 						}
@@ -988,9 +1250,9 @@
 					"response": []
 				},
 				{
-					"name": "localhost:8080/schedule/delete",
+					"name": "localhost:8080/schedules/delete",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -1000,16 +1262,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"scheduleId\":2,\r\n    \"classId\":8,\r\n    \"subjectId\":7,\r\n    \"task\":\"Updated shedule\"\r\n}"
+							"raw": "{\r\n    \"scheduleId\":3,\r\n    \"classId\":8,\r\n    \"subjectId\":7,\r\n    \"task\":\"Updated shedule\"\r\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/schedule/delete",
+							"raw": "localhost:8080/schedules/delete",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"schedule",
+								"schedules",
 								"delete"
 							]
 						}
@@ -1017,6 +1279,76 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"roles\": [\"admin\"]\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/auth/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzYyMzI3NCwiZXhwIjoxNjQzNzA5Njc0fQ.qeScKUaqvMVOnUNu-77Au1LlptNyps3o3MJqQOx1wHMGDbwbbx0Y6d27XhPysKVSOi3FC33Ok1JpCaoGMkxxNQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"12345678\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/auth/signin",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
